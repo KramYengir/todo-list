@@ -1,2 +1,2 @@
 import './styles/main.scss';
-import nav from './modules/nav.js';
+import Nav from './modules/nav.js';
