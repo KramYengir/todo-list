@@ -42,7 +42,7 @@ const Todo = (()=>{
         //for testing
         if(todoList.length == 0){
             const newTodo1 = createTodo('go shopping', '12/09', 'important')
-            const newTodo2 = createTodo('go to the cinema', '12/09', 'important')
+            const newTodo2 = createTodo('go to the cinema', '12/09', 'not important')
         }
         //
         return todoList;

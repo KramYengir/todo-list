@@ -28,6 +28,10 @@ const TodoUI = (()=>{
         const priority = document.createElement('div');
         priority.textContent = todo.priority;
         priority.classList.add('priority');
+
+        if(todo.priority == 'important'){
+            todoContainer.style.border = '1px solid red';
+        }
     
         todoContainer.appendChild(checkBox);
         todoContainer.appendChild(taskName);
@@ -36,6 +40,12 @@ const TodoUI = (()=>{
     
         return todoContainer;
     
+    }
+
+    const updatePriorityColor = (todo, container)=>{
+        if(todo.priority == 'important'){
+            container.stye.border = '1px solid red';
+        }
     }
 
     const getArrayOfTodoElements = (todos)=>{
