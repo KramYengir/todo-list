@@ -1,6 +1,25 @@
 .todo-container{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 
     padding: 0.5rem 0.6rem;
+    margin: 0.4rem;
+
+    border: 1px dashed grey;
+    border-radius: 10px;
+    background-color: azure;
+
+    .checkbox{
+        width: 2rem;
+    }
+
+    .task{
+        margin-right: auto;
+    }
+
+    .date{
+        margin-right: 2rem;
+    }
+
+
 }

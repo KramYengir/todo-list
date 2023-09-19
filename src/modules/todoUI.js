@@ -12,18 +12,22 @@ const TodoUI = (()=>{
         checkBox.type = "checkbox";
         checkBox.name = "completed-checkbox";
         checkBox.value = "false";
+        checkBox.classList.add('checkbox');
     
         //todo name
         const taskName = document.createElement('div');
         taskName.textContent = todo.task;
+        taskName.classList.add('task');
     
         //todo date
         const date = document.createElement('div');
         date.textContent = todo.date;
+        date.classList.add('date');
     
         //todo priority
         const priority = document.createElement('div');
         priority.textContent = todo.priority;
+        priority.classList.add('priority');
     
         todoContainer.appendChild(checkBox);
         todoContainer.appendChild(taskName);
