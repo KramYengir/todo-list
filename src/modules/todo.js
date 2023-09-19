@@ -41,8 +41,8 @@ const Todo = (()=>{
     const getAllTodos = ()=>{
         //for testing
         if(todoList.length == 0){
-            const newTodo = createTodo('go shopping', '12/09', 'important')
-            todoList.push(newTodo);
+            const newTodo1 = createTodo('go shopping', '12/09', 'important')
+            const newTodo2 = createTodo('go to the cinema', '12/09', 'important')
         }
         //
         return todoList;
