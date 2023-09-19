@@ -29,6 +29,15 @@ const Todo = (()=>{
         }
     }
 
+    const editTodo = (id, updatedTask, updatedDate, updatedPriority) =>{
+        const todo = todoList.find((todo) => todo.id === id);
+        if (todo) {
+            todo.task = updatedTask;
+            todo.date = updatedDate;
+            todo,priority = updatedPriority;
+          }
+    }
+
     const getAllTodos = ()=>{
         return todoList;
     }
@@ -38,6 +47,7 @@ const Todo = (()=>{
         deleteTodo,
         toggleCompleted,
         getAllTodos,
+        editTodo,
     }
 
 })();
