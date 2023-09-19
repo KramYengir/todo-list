@@ -32,11 +32,20 @@ const TodoUI = (()=>{
         if(todo.priority == 'important'){
             todoContainer.style.border = '1px solid red';
         }
+
+        //buttons
+        const editBtn = document.createElement('button');
+        editBtn.classList.add('edit-button');
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-button');
     
         todoContainer.appendChild(checkBox);
         todoContainer.appendChild(taskName);
         todoContainer.appendChild(date);
         todoContainer.appendChild(priority);
+        todoContainer.appendChild(editBtn);
+        todoContainer.appendChild(deleteBtn);
     
         return todoContainer;
     
