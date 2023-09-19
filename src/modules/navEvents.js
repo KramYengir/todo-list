@@ -1,4 +1,7 @@
-import main from './main.js';
+import Main from './main.js';
+import TodoLogic from './todo.js';
+import TodoBuilder from './todoUI.js'
+
 const date = new Date();
 
 const Nav = (()=>{
@@ -13,22 +16,28 @@ const Nav = (()=>{
     const links = [todayLink, weekLink, allLink, projectsLink];
 
     todayLink.addEventListener('click', (e)=>{
-        console.log('today link clicked');
         toggleActiveLinks(e.target);
     })
 
     weekLink.addEventListener('click', (e)=>{
-        console.log('week link clicked');
         toggleActiveLinks(e.target);
     })
 
     allLink.addEventListener('click', (e)=>{
-        console.log('all link clicked');
         toggleActiveLinks(e.target);
+        
+        const todos = TodoLogic.getAllTodos();
+        const todoElements = TodoBuilder.getArrayOfTodoElements(todos);
+
+        if(todoElements.length != 0){
+            Main.loadFromArray(todoElements);
+            console.log(todos);
+        }
+        else alert('No todos');
+
     })
 
     projectsLink.addEventListener('click', (e)=>{
-        console.log('projects link clicked');
         toggleActiveLinks(e.target);
 
     })

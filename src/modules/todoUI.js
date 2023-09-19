@@ -1,32 +1,54 @@
+import Todo from "./todo.js";
 
+const TodoUI = (()=>{
 
-const todoItem = (todo)=>{
+    const buildTodo = (todo)=>{
+        
+        const todoContainer = document.createElement('div');
+        todoContainer.classList.add('todo-container');
     
-    const todoContainer = document.createElement('div');
-    todoContainer.classList.add('todo-container');
+        //checkbox to mark completed
+        const checkBox = document.createElement('input');
+        checkBox.type = "checkbox";
+        checkBox.name = "completed-checkbox";
+        checkBox.value = "false";
+    
+        //todo name
+        const taskName = document.createElement('div');
+        taskName.textContent = todo.task;
+    
+        //todo date
+        const date = document.createElement('div');
+        date.textContent = todo.date;
+    
+        //todo priority
+        const priority = document.createElement('div');
+        priority.textContent = todo.priority;
+    
+        todoContainer.appendChild(checkBox);
+        todoContainer.appendChild(taskName);
+        todoContainer.appendChild(date);
+        todoContainer.appendChild(priority);
+    
+        return todoContainer;
+    
+    }
 
-    //checkbox to mark completed
-    const checkBox = document.createElement('checkbox');
+    const getArrayOfTodoElements = (todos)=>{
+        const arrayOfElements = [];
 
-    //todo name
-    const taskName = document.createElement('div');
-    taskName.textContent = todo.task;
+        todos.forEach(todo => {
+            arrayOfElements.push(buildTodo(todo));
+        });
+        console.log(arrayOfElements);
+        return arrayOfElements
+    }
 
-    //todo date
-    const date = document.createElement('div');
-    date.textContent = todo.date;
+    return{
+        buildTodo,
+        getArrayOfTodoElements,
+    }
+})();
 
-    //todo priority
-    const priority = document.createElement('div');
-    priority.textContent = todo.priority;
 
-    todoContainer.appendChild(checkBox);
-    todoContainer.appendChild(taskName);
-    todoContainer.appendChild(date);
-    todoContainer.appendChild(priority);
-
-    return todoContainer;
-
-}
-
-export default todoItem;
+export default TodoUI;

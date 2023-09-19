@@ -2,7 +2,7 @@ const Todo = (()=>{
 
     const todoList = [];
 
-    const createTodo = (id, task, date, priority, completed)=>{
+    const createTodo = (task, date, priority)=>{
         const newTodo = {
             id: Date.now(),
             task,
@@ -39,6 +39,12 @@ const Todo = (()=>{
     }
 
     const getAllTodos = ()=>{
+        //for testing
+        if(todoList.length == 0){
+            const newTodo = createTodo('go shopping', '12/09', 'important')
+            todoList.push(newTodo);
+        }
+        //
         return todoList;
     }
 

@@ -2,13 +2,19 @@ const Main = (()=>{
 
     const mainContainer = document.querySelector('main');
 
-    //load content into the main area
+    //load a single element into the main area
     const loadContent = (content)=>{
-        clearContent();
         mainContainer.appendChild(content);
     }
 
-    //clear all content before loading new content
+    const loadFromArray = (array)=>{
+        clearContent();
+        array.forEach(element => {
+            mainContainer.appendChild(element);
+        });
+    }
+
+    //clear all content 
     const clearContent = ()=>{
         while (mainContainer.firstChild) {
             mainContainer.removeChild(mainContainer.firstChild);
@@ -16,7 +22,9 @@ const Main = (()=>{
     }
 
     return{
-        loadContent
+        loadContent,
+        loadFromArray,
+        clearContent,
     }
 
 })();
