@@ -1,5 +1,6 @@
 $primary-clr: #38BDC7;
-$secondary-clr: #60CBD2;
+$primary-clr-light: #60CBD2;
+$secondary-clr: #C74238;
 
 *{
     box-sizing: border-box;
@@ -39,7 +40,11 @@ header{
 }
 
 nav{
-    background-color: $secondary-clr;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: $primary-clr-light;
 
     padding-top: 2rem;
 
@@ -53,7 +58,34 @@ nav{
         }
 
         a.active{
-            color: red;
+            color: $secondary-clr;
+        }
+    }
+
+    button{
+        width: 3rem;
+        height: 3rem;
+
+        margin-inline: auto;
+        margin-bottom: 3rem;
+
+        border: none;
+        border-radius: 1000px;
+
+        background-color: whitesmoke;
+
+        box-shadow: 1px 3px 4px $primary-clr;
+
+        cursor: pointer;
+       
+	    &:before {
+            content: '+';
+            font-size: 1.5rem;
+            color: $primary-clr;
+        }
+
+        &:hover{
+            transform: scale(1.05);
         }
     }
 }

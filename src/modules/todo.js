@@ -48,6 +48,14 @@ const Todo = (()=>{
         return todoList;
     }
 
+    const getTodaysTodos = ()=>{
+
+    }
+
+    const getWeeksTodos = ()=>{
+        
+    }
+
     return {
         createTodo,
         deleteTodo,

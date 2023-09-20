@@ -20,6 +20,12 @@
     .date{
         margin-right: auto;
     }
+    .date::before{
+        content: 'Due: ';
+        color: grey;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
 
     .priority{
         margin-right: 1rem;
