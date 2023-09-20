@@ -1,0 +1,27 @@
+const Modal = ()=>{
+    const newTodoModal = ()=>{
+         
+        //modal container
+        const modalContainer = document.createElement('div');
+        modalContainer.classList.add('modal-container');
+        modalContainer.id = 'new-todo-modal-container';
+
+        //modal itself
+        const modal = document.createElement('div');
+        modal.classList.add('modal');
+        modal.id = 'new-todo-modal';
+
+        
+    }
+
+    const editTodoModal = ()=>{
+        
+    }
+
+    return{
+        newTodoModal,
+        editTodoModal,
+    }
+}
+
+export default Modal;

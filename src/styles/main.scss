@@ -2,6 +2,8 @@ $primary-clr: #38BDC7;
 $primary-clr-light: #60CBD2;
 $secondary-clr: #C74238;
 
+$modal-bg: rgba(7, 6, 6, 0.775);
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -92,9 +94,50 @@ nav{
 
 main{
     background-color: whitesmoke;
+
 }
 
 footer{
     grid-column: span 2;
     background-color: $primary-clr;
+}
+
+#modal-container{
+    /* position: absolute;
+    top: 50%;
+    left: 50%; */
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $modal-bg;
+
+    .modal{
+        padding: 3rem;
+        background-color: $primary-clr;
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            .input-group{
+                display: flex;
+                flex-direction: column;
+                gap: 0.2rem;
+
+                label{
+                    color: $secondary-clr;
+                }
+
+                /* input, select{
+                    margin-top: 0.2rem;
+                } */
+            }
+        }
+    }
 }

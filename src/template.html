@@ -25,8 +25,36 @@
             </div>
             <button id="new-todo-btn"></button>
         </nav>
-        <main></main>
+        <main>
+            
+        </main>
         <footer></footer>
+        <div id="modal-container" >
+            <div class="modal">
+                <form>
+                    <div class="input-group">
+                        <label for="task">Task:</label>
+                        <input type="text" id="task" name="task">
+                    </div>
+                    <div class="input-group">
+                        <label for="date">Date:</label>
+                        <input type="text" id="date" name="date">
+                    </div>
+                    <div class="input-group">
+                        <label for="priority">Priority:</label>
+                        <select name="priority" id="priority">
+                          <option value="low">Low</option>
+                          <option value="medium">Medium</option>
+                          <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="btn-group input-group">
+                        <button>Confirm</button>
+                        <button>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
