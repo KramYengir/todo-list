@@ -1,4 +1,5 @@
 import Todo from "./todo.js";
+import Modal from "./modal.js";
 
 const TodoUI = (()=>{
 
@@ -36,6 +37,9 @@ const TodoUI = (()=>{
         //buttons
         const editBtn = document.createElement('button');
         editBtn.classList.add('edit-button');
+        editBtn.addEventListener('click', ()=>{
+            Modal.editTodoModal(todo);
+        })
         
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-button');
