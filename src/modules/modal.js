@@ -1,3 +1,5 @@
+import Todo from "./todo";
+
 const Modal = (()=>{
 
     let isNewTodo = false;
@@ -14,19 +16,21 @@ const Modal = (()=>{
     const priorityInput = document.getElementById('priority');
 
     //get buttons
-    const newTodoBtn = document.getElementById('new-todo-btn');
     const confirmBtn = document.getElementById('confirm-btn');
     const cancelBtn = document.getElementById('cancel-btn');
 
-    //not sure if i need this...
-    const newTodo = ()=>{
-         
-          
+
+    const setIsNewTodo = (value)=>{
+        isNewTodo = value; 
+    }
+    
+    const openEditTodoModal = (todo)=>{
+        openModal();
+        fillFormFields(todo);
+        editTodoId = todo.id;
     }
 
-    const editTodoModal = (todo)=>{
-        openModal();
-        //set fields
+    const fillFormFields = (todo)=>{
         taskInput.value = todo.task;
         dateInput.value = todo.date;
     }
@@ -46,15 +50,29 @@ const Modal = (()=>{
     const openModal = ()=>{
         modalContainer.style.display = 'flex';
     }
-    
-    newTodoBtn.addEventListener('click', ()=>{
-        openModal();
-    });
+
+
+    ////////////////
+    //eventlisteners
+    ////////////////
 
     confirmBtn.addEventListener('click', (e)=>{
         e.preventDefault();
         ///check fields
         //check isNewTodo then newTodo or editTodo
+        if(isNewTodo){
+            Todo.createTodo(taskInput.value, dateInput.value,
+                priorityInput.value);
+            console.log('createing new todo');
+        }
+        else{
+            Todo.editTodo(editTodoId, taskInput.value, dateInput.value,
+                priorityInput.value);
+                console.log('editing todo');
+        }
+
+        console.log(isNewTodo);
+
         closeModal();   
     });
     
@@ -65,7 +83,8 @@ const Modal = (()=>{
 
 
     return{
-        editTodoModal,
+        setIsNewTodo,
+        openEditTodoModal,
         openModal,
     }
 })();

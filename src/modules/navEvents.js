@@ -1,6 +1,7 @@
 import Main from './main.js';
-import TodoLogic from './todo.js';
-import TodoBuilder from './todoUI.js'
+import Todo from './todo.js';
+import TodoUI from './todoUI.js'
+import Modal from './modal.js';
 
 const date = new Date();
 
@@ -11,6 +12,7 @@ const Nav = (()=>{
     const weekLink = document.getElementById('week-link');
     const allLink = document.getElementById('all-link');
     const projectsLink = document.getElementById('projects-link');
+    const newTodoBtn = document.getElementById('new-todo-btn');
 
     //put links into an array
     const links = [todayLink, weekLink, allLink, projectsLink];
@@ -26,8 +28,8 @@ const Nav = (()=>{
     allLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
         
-        const todos = TodoLogic.getAllTodos();
-        const todoElements = TodoBuilder.getArrayOfTodoElements(todos);
+        const todos = Todo.getAllTodos();
+        const todoElements = TodoUI.getArrayOfTodoElements(todos);
 
         if(todoElements.length != 0){
             Main.loadFromArray(todoElements);
@@ -41,6 +43,13 @@ const Nav = (()=>{
         toggleActiveLinks(e.target);
 
     })
+
+    newTodoBtn.addEventListener('click', ()=>{
+        Modal.openModal();
+        Modal.setIsNewTodo(true);
+        console.log(Modal.isNewTodo);
+    });
+
 
     //toggle 'active' class on all links
     const toggleActiveLinks = (clickedLink)=>{

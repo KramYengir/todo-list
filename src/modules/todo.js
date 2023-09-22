@@ -3,8 +3,11 @@ const Todo = (()=>{
     const todoList = [];
 
     const createTodo = (task, date, priority)=>{
-        const newTodo = {
-            id: Date.now(),
+        const generateId = () => `${performance.now()}${Math.random()
+            .toString().slice(5)}`.replace('.','')
+        
+            const newTodo = {
+            id: generateId(),
             task,
             date,
             priority,
@@ -34,7 +37,7 @@ const Todo = (()=>{
         if (todo) {
             todo.task = updatedTask;
             todo.date = updatedDate;
-            todo,priority = updatedPriority;
+            todo.priority = updatedPriority;
           }
     }
 

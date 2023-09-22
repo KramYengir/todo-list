@@ -38,7 +38,8 @@ const TodoUI = (()=>{
         const editBtn = document.createElement('button');
         editBtn.classList.add('edit-button');
         editBtn.addEventListener('click', ()=>{
-            Modal.editTodoModal(todo);
+            Modal.openEditTodoModal(todo);
+            console.log(todo.id);
         })
         
         const deleteBtn = document.createElement('button');

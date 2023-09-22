@@ -14,6 +14,9 @@ const Main = (()=>{
         });
     }
 
+    //need a refresh function that checks which navlink
+    // is active and refresh displayed todos
+
     //clear all content 
     const clearContent = ()=>{
         while (mainContainer.firstChild) {
