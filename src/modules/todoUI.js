@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import Todo from "./todo.js";
 import Modal from "./modal.js";
 
@@ -22,7 +23,8 @@ const TodoUI = (()=>{
     
         //todo date
         const date = document.createElement('div');
-        date.textContent = todo.date;
+        let formattedDate = format(new Date(todo.date), 'dd-MMM-yyyy');
+        date.textContent = formattedDate;
         date.classList.add('date');
     
         //todo priority
