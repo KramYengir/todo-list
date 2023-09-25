@@ -31,7 +31,14 @@ const Nav = (()=>{
     })
 
     weekLink.addEventListener('click', (e)=>{
-        toggleActiveLinks(e.target);
+        const todos = Todo.getWeeksTodos();
+        const todoElements = TodoUI.getArrayOfTodoElements(todos);
+
+        if(todoElements.length != 0){
+            Main.loadFromArray(todoElements);
+            console.log(todos);
+        }
+        else alert('No todos');
     })
 
     allLink.addEventListener('click', (e)=>{

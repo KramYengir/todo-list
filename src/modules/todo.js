@@ -1,3 +1,5 @@
+import { add, isWithinInterval } from "date-fns";
+
 const Todo = (()=>{
 
     //NOTE: Todo dates are stored yyyy-mm-dd but are
@@ -57,18 +59,35 @@ const Todo = (()=>{
 
     const getTodaysTodos = ()=>{
         const currentDate = new Date().toJSON().slice(0, 10);
-        console.log(currentDate);
-        const todaysTodos = 
-            todoList.filter(todo =>{
+
+        const todaysTodos = todoList.filter(todo =>{
                 if(todo.date === currentDate)
-                return todo});
-        console.log(todaysTodos);
+                return todo
+            });
 
         return todaysTodos;
     }
 
     const getWeeksTodos = ()=>{
-        
+
+        const weeksTodos = todoList.filter(todo =>{
+            if(isWithinWeek(todo.date))
+            return todo;
+        })
+
+        return weeksTodos;
+
+    }
+
+    const isWithinWeek = (date)=>{
+        // if todo date is less than currentdate + 7
+        const currentDate = new Date(new Date().toJSON().slice(0, 10));
+        const endOfWeek = add(currentDate, {weeks: 1});
+
+        return isWithinInterval(new Date(date), {
+            start: currentDate,
+            end: endOfWeek,
+          })
     }
 
     return {
@@ -76,6 +95,7 @@ const Todo = (()=>{
         deleteTodo,
         toggleCompleted,
         getTodaysTodos,
+        getWeeksTodos,
         getAllTodos,
         editTodo,
     }
