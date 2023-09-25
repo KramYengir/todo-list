@@ -1,5 +1,8 @@
 const Todo = (()=>{
 
+    //NOTE: Todo dates are stored yyyy-mm-dd but are
+    //displayed, using date-fns, as dd-MMM-yyyy
+
     const todoList = [];
 
     const createTodo = (task, date, priority)=>{
@@ -14,6 +17,8 @@ const Todo = (()=>{
             completed: false,
         };
         todoList.push(newTodo);
+
+        console.log(newTodo);
 
         return newTodo;
     }
@@ -51,7 +56,15 @@ const Todo = (()=>{
     }
 
     const getTodaysTodos = ()=>{
+        const currentDate = new Date().toJSON().slice(0, 10);
+        console.log(currentDate);
+        const todaysTodos = 
+            todoList.filter(todo =>{
+                if(todo.date === currentDate)
+                return todo});
+        console.log(todaysTodos);
 
+        return todaysTodos;
     }
 
     const getWeeksTodos = ()=>{
@@ -62,6 +75,7 @@ const Todo = (()=>{
         createTodo,
         deleteTodo,
         toggleCompleted,
+        getTodaysTodos,
         getAllTodos,
         editTodo,
     }

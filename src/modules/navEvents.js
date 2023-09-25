@@ -19,6 +19,15 @@ const Nav = (()=>{
 
     todayLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
+
+        const todos = Todo.getTodaysTodos();
+        const todoElements = TodoUI.getArrayOfTodoElements(todos);
+
+        if(todoElements.length != 0){
+            Main.loadFromArray(todoElements);
+            console.log(todos);
+        }
+        else alert('No todos');
     })
 
     weekLink.addEventListener('click', (e)=>{
