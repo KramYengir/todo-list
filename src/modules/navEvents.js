@@ -1,9 +1,6 @@
 import Main from './main.js';
-import Todo from './todo.js';
-import TodoUI from './todoUI.js'
 import Modal from './modal.js';
 
-const date = new Date();
 
 const Nav = (()=>{
 
@@ -19,40 +16,18 @@ const Nav = (()=>{
 
     todayLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
+        Main.loadTodayTodos();
 
-        const todos = Todo.getTodaysTodos();
-        const todoElements = TodoUI.getArrayOfTodoElements(todos);
-
-        if(todoElements.length != 0){
-            Main.loadFromArray(todoElements);
-            console.log(todos);
-        }
-        else alert('No todos');
     })
 
     weekLink.addEventListener('click', (e)=>{
-        const todos = Todo.getWeeksTodos();
-        const todoElements = TodoUI.getArrayOfTodoElements(todos);
-
-        if(todoElements.length != 0){
-            Main.loadFromArray(todoElements);
-            console.log(todos);
-        }
-        else alert('No todos');
+        toggleActiveLinks(e.target);
+        Main.loadWeekTodos();
     })
 
     allLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
-        
-        const todos = Todo.getAllTodos();
-        const todoElements = TodoUI.getArrayOfTodoElements(todos);
-
-        if(todoElements.length != 0){
-            Main.loadFromArray(todoElements);
-            console.log(todos);
-        }
-        else alert('No todos');
-
+        Main.loadAllTodos();
     })
 
     projectsLink.addEventListener('click', (e)=>{
@@ -72,12 +47,26 @@ const Nav = (()=>{
         links.forEach(link =>{
             if(link != clickedLink){
                 link.classList.remove('active');
-
             }
             else{
                 link.classList.add('active');
             }
         })
+    }
+
+    const getActiveTab = ()=>{
+        links.forEach(el =>{
+            if(el.classList.contains('active')){
+            activeTab = el.id;
+            }
+        })
+        console.log('called from main: '+activeTab);
+
+        return activeTab;
+    }
+
+    return{
+        getActiveTab,
     }
     
 })();

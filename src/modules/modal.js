@@ -1,3 +1,4 @@
+import Main from "./main";
 import Todo from "./todo";
 
 const Modal = (()=>{
@@ -45,6 +46,7 @@ const Modal = (()=>{
         modalContainer.style.display = 'none';
         isNewTodo = false;
         resetFields();
+        Main.refresh();
     }
 
     const openModal = ()=>{
