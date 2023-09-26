@@ -32,6 +32,7 @@ const Nav = (()=>{
 
     projectsLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
+        toggleProjectLinks();
 
     })
 
@@ -63,6 +64,11 @@ const Nav = (()=>{
         console.log('called from main: '+activeTab);
 
         return activeTab;
+    }
+
+    const toggleProjectLinks = ()=>{
+        document.getElementById('project-links-display')
+            .classList.toggle('active');
     }
 
     return{

@@ -5,6 +5,10 @@ const Main = (()=>{
 
     const mainContainer = document.querySelector('main');
 
+    const noTodosMsg = document.createElement('div');
+    noTodosMsg.textContent = 'No Todos To Display :(';
+    noTodosMsg.id = 'no-todos-msg';
+
     //load a single element into the main area
     const loadContent = (content)=>{
         mainContainer.appendChild(content);
@@ -24,7 +28,7 @@ const Main = (()=>{
         if(todoElements.length != 0){
             loadFromArray(todoElements);
         }
-        else alert('No todos');
+        else dislpayNoTodosMsg();
     }
 
     const loadWeekTodos = ()=>{
@@ -35,7 +39,7 @@ const Main = (()=>{
             loadFromArray(todoElements);
             console.log(todos);
         }
-        else alert('No todos');
+        else dislpayNoTodosMsg();
     }
 
     const loadAllTodos = ()=>{
@@ -46,11 +50,9 @@ const Main = (()=>{
             loadFromArray(todoElements);
             console.log(todos);
         }
-        else alert('No todos');
+        else dislpayNoTodosMsg();
     }
 
-    //need a refresh function that checks which navlink
-    // is active and refresh displayed todos
     const refresh = ()=>{
       let activeTab = getActiveTab();
 
@@ -80,8 +82,11 @@ const Main = (()=>{
         })
 
         return activeTab;
+    }
 
-        console.log('found active tab in getActiveTab: '+activeTab);
+    const dislpayNoTodosMsg = ()=>{
+        clearContent();
+        loadContent(noTodosMsg);
     }
 
     //clear all content 
