@@ -53,10 +53,6 @@ const Nav = (()=>{
         console.log(Modal.isNewTodo);
     });
 
-    const addToLinksArray = (link)=>{
-        link.push
-    }
-
 
     //toggle 'active' class on all links
     const toggleActiveLinks = (clickedLink)=>{
@@ -98,6 +94,7 @@ const Nav = (()=>{
 
     return{
         getActiveTab,
+        toggleActiveLinks,
     }
     
 })();

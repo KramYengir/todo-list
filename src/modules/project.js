@@ -1,3 +1,7 @@
+import Main from "./main";
+import Modal from "./modal";
+import Nav from "./navEvents";
+
 const Project = (()=>{
 
     const projectsContainer = document.getElementById('project-links-display');
@@ -12,6 +16,9 @@ const Project = (()=>{
         const anchorEl = document.createElement('a');
         anchorEl.href = '#';
         anchorEl.textContent = name;
+        anchorEl.addEventListener('click', (e)=>{
+            handleClick(e.target);
+        })
 
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'x';
@@ -29,9 +36,15 @@ const Project = (()=>{
 
     }
 
+    const handleClick = (clickedLink)=>{
+        Main.loadProjectTodos(clickedLink.parentNode.id);
+        Nav.toggleActiveLinks(clickedLink);
+    }
+
     const addNewProjectTab = (projectName)=>{
         const tabEl = createTabElement(projectName);
         projectsContainer.insertBefore(tabEl, projectsContainer.childNodes[0]);
+        Modal.addProjectOption(projectName);
     }
 
     const removeTab = (tab)=>{

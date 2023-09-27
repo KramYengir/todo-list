@@ -27,40 +27,42 @@ const TodoUI = (()=>{
         date.textContent = formattedDate;
         date.classList.add('date');
     
-        //todo priority
-        const priority = document.createElement('div');
-        priority.textContent = todo.priority;
-        priority.classList.add('priority');
-
-        if(todo.priority == 'important'){
-            todoContainer.style.border = '1px solid red';
-        }
+        //todo project
+        const project = document.createElement('div');
+        project.textContent = todo.project;
+        project.classList.add('project');
 
         //buttons
         const editBtn = document.createElement('button');
         editBtn.classList.add('edit-button');
         editBtn.addEventListener('click', ()=>{
             Modal.openEditTodoModal(todo);
-            console.log(todo.id);
         })
         
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-button');
+
+        updatePriorityColor(todo, todoContainer);
     
         todoContainer.appendChild(checkBox);
         todoContainer.appendChild(taskName);
         todoContainer.appendChild(date);
-        todoContainer.appendChild(priority);
+        todoContainer.appendChild(project);
         todoContainer.appendChild(editBtn);
         todoContainer.appendChild(deleteBtn);
+
     
         return todoContainer;
     
     }
 
     const updatePriorityColor = (todo, container)=>{
-        if(todo.priority == 'important'){
-            container.stye.border = '1px solid red';
+        if(todo.priority == 'low'){
+            container.style.border = '1px solid green';
+        }else if(todo.priority == 'medium'){
+            container.style.border = '1px solid orange';
+        }else {
+            container.style.border = '1px solid red';
         }
     }
 

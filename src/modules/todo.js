@@ -7,7 +7,7 @@ const Todo = (()=>{
 
     const todoList = [];
 
-    const createTodo = (task, date, priority)=>{
+    const createTodo = (task, date, project, priority)=>{
         const generateId = () => `${performance.now()}${Math.random()
             .toString().slice(5)}`.replace('.','')
         
@@ -15,8 +15,8 @@ const Todo = (()=>{
             id: generateId(),
             task,
             date,
+            project,
             priority,
-            project: '',
             completed: false,
         };
         todoList.push(newTodo);
@@ -40,21 +40,17 @@ const Todo = (()=>{
         }
     }
 
-    const editTodo = (id, updatedTask, updatedDate, updatedPriority) =>{
+    const editTodo = (id, updatedTask, updatedDate, updatedProject, updatedPriority) =>{
         const todo = todoList.find((todo) => todo.id === id);
         if (todo) {
             todo.task = updatedTask;
             todo.date = updatedDate;
+            todo.project = updatedProject;
             todo.priority = updatedPriority;
           }
     }
 
     const getAllTodos = ()=>{
-        //for testing
-        if(todoList.length == 0){
-            const newTodo1 = createTodo('go shopping', '2023-4-11', 'important')
-        }
-        //
         return todoList;
     }
 
@@ -80,6 +76,15 @@ const Todo = (()=>{
 
     }
 
+    const getProjectTodos = (projectName)=>{
+        const projectTodos = todoList.filter(todo =>{
+            if(todo.project === projectName)
+            return todo;
+        })
+
+        return projectTodos;
+    }
+
     const isWithinWeek = (date)=>{
         // if todo date is less than currentdate + 7
         const currentDate = new Date(new Date().toJSON().slice(0, 10));
@@ -98,6 +103,7 @@ const Todo = (()=>{
         getTodaysTodos,
         getWeeksTodos,
         getAllTodos,
+        getProjectTodos,
         editTodo,
     }
 

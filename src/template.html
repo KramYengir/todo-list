@@ -20,7 +20,7 @@
                     <li><a id="today-link" class="active">Today</a></li>
                     <li><a id="week-link" href="#">This Week</a></li>
                     <li><a id="all-link" href="#">All</a></li>
-                    <li><a id="projects-link" href="#">Projects</a></li>
+                    <li><div id="projects-link" href="#">Projects</div></li>
                     <div id="project-links-display">
                         <li class="add-project-input">
                             <input type="text" id="project-input"><button id="new-project-btn">Add</button>
@@ -44,6 +44,12 @@
                     <div class="input-group">
                         <label for="date">Date:</label>
                         <input type="date" id="date" name="date">
+                    </div>
+                    <div class="input-group">
+                        <label for="project">Project:</label>
+                        <select name="project" id="project">
+                          <option value="none">--none--</option>
+                        </select>
                     </div>
                     <div class="input-group">
                         <label for="priority">Priority:</label>

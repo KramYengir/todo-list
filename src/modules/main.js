@@ -53,6 +53,17 @@ const Main = (()=>{
         else dislpayNoTodosMsg();
     }
 
+    const loadProjectTodos = (name)=>{
+        const todos = Todo.getProjectTodos(name);
+        const todoElements = TodoUI.getArrayOfTodoElements(todos);
+
+        if(todoElements.length != 0){
+            loadFromArray(todoElements);
+            console.log(todos);
+        }
+        else dislpayNoTodosMsg();
+    }
+
     const refresh = ()=>{
       let activeTab = getActiveTab();
 
@@ -67,7 +78,8 @@ const Main = (()=>{
             loadAllTodos();
             break;
         default:
-            console.log('could nto find active link!');
+            loadProjectTodos(activeTab);
+            console.log('activeTab= '+activeTab)
       }
     }
 
@@ -77,7 +89,7 @@ const Main = (()=>{
 
         links.forEach(el =>{
             if(el.classList.contains('active')){
-            activeTab = el.id;
+                el.id === '' ? activeTab = el.parentNode.id : activeTab = el.id;
             }
         })
 
@@ -100,6 +112,7 @@ const Main = (()=>{
         loadTodayTodos,
         loadWeekTodos,
         loadAllTodos,
+        loadProjectTodos,
         clearContent,
         refresh,
     }
