@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import Todo from "./todo.js";
 import Modal from "./modal.js";
+import Main from "./main.js";
 
 const TodoUI = (()=>{
 
@@ -41,6 +42,10 @@ const TodoUI = (()=>{
         
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-button');
+        deleteBtn.addEventListener('click', ()=>{
+            Todo.deleteTodo(todo.id);
+            Main.refresh();
+        })
 
         updatePriorityColor(todo, todoContainer);
     

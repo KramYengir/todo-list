@@ -29,7 +29,7 @@ const Todo = (()=>{
     const deleteTodo = (id)=>{
         const index = todoList.findIndex((todo) => todo.id === id);
         if (index !== -1) {
-          todos.splice(index, 1);
+          todoList.splice(index, 1);
         }
     }
 
