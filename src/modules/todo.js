@@ -16,6 +16,7 @@ const Todo = (()=>{
             task,
             date,
             priority,
+            project: '',
             completed: false,
         };
         todoList.push(newTodo);

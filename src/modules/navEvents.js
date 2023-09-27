@@ -1,5 +1,6 @@
 import Main from './main.js';
 import Modal from './modal.js';
+import Project from './project.js';
 
 
 const Nav = (()=>{
@@ -9,6 +10,10 @@ const Nav = (()=>{
     const weekLink = document.getElementById('week-link');
     const allLink = document.getElementById('all-link');
     const projectsLink = document.getElementById('projects-link');
+    //input
+    const projectInput = document.getElementById('project-input')
+    //buttons
+    const newProjecttn = document.getElementById('new-project-btn');
     const newTodoBtn = document.getElementById('new-todo-btn');
 
     //put links into an array
@@ -36,16 +41,30 @@ const Nav = (()=>{
 
     })
 
+    newProjecttn.addEventListener('click', ()=>{
+        const name = projectInput.value;
+        Project.addNewProjectTab(name);
+        projectInput.value = '';
+    })
+
     newTodoBtn.addEventListener('click', ()=>{
         Modal.openModal();
         Modal.setIsNewTodo(true);
         console.log(Modal.isNewTodo);
     });
 
+    const addToLinksArray = (link)=>{
+        link.push
+    }
+
 
     //toggle 'active' class on all links
     const toggleActiveLinks = (clickedLink)=>{
-        links.forEach(link =>{
+
+        //get live list of links first
+        const liveLinks = getCurrentLinks();
+
+        liveLinks.forEach(link =>{
             if(link != clickedLink){
                 link.classList.remove('active');
             }
@@ -69,6 +88,12 @@ const Nav = (()=>{
     const toggleProjectLinks = ()=>{
         document.getElementById('project-links-display')
             .classList.toggle('active');
+    }
+
+    const getCurrentLinks = ()=>{
+        const getCurrentLinks = [...document.querySelector('nav').querySelectorAll('a')];
+
+        return getCurrentLinks;
     }
 
     return{

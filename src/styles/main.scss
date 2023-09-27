@@ -18,7 +18,7 @@ body{
 #container{
     height: 100%;
     display: grid;
-    grid-template: 0.1fr 1fr 0.05fr / 0.25fr 1fr;
+    grid-template: 0.1fr 1fr 0.05fr / 0.3fr 1fr;
 }
 
 header{
@@ -54,6 +54,8 @@ nav{
         margin-block: 1rem;
         width: 100%;
 
+        transition: all 0.5s;
+
         cursor: pointer;
 
         a{
@@ -66,17 +68,24 @@ nav{
         }
     }
 
+    li:has(a.active){
+        background-color: #fff;
+    }
+
     #project-links-display{
         display: none;
     }
 
     #project-links-display.active{
-        display: block;
+        display: flex;
+        flex-direction: column;
 
+        padding-left: 1rem;
 
         .add-project-input{
 
             display: flex;
+            padding-right: 5px;
     
             input{
                 width: 10rem;
@@ -91,7 +100,35 @@ nav{
                 border: none;
                 border-radius: 5px;
                 background-color: $primary-clr;
+
         
+            }
+        }
+
+        .project-link{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 5px;
+            margin-block: 0;
+
+
+            .delete-project-btn{
+                display: none;
+                width: 1.2rem;
+                height: 1.2rem;
+
+                border: none;
+                border-radius: 10px;
+
+                color: #C74238;
+                background-color: $primary-clr;
+            }
+
+            &:hover, &:focus{
+                .delete-project-btn{
+                    display: block;
+                }
             }
         }
     }
