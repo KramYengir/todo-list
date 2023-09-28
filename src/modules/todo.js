@@ -135,6 +135,7 @@ const Todo = (()=>{
         getAllTodos,
         getProjectTodos,
         editTodo,
+        toggleCompleted,
         loadSampleTodos,
     }
 

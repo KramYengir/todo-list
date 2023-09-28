@@ -38,3 +38,11 @@
 
 
 }
+
+.todo-container.completed{
+    background-color: grey;
+
+    .task{
+        text-decoration: line-through;
+    }
+}

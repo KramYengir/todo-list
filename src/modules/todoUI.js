@@ -14,8 +14,13 @@ const TodoUI = (()=>{
         const checkBox = document.createElement('input');
         checkBox.type = "checkbox";
         checkBox.name = "completed-checkbox";
-        checkBox.value = "false";
+        checkBox.checked = todo.completed;
+        console.log('here i am ;'+todo.completed);
         checkBox.classList.add('checkbox');
+        checkBox.addEventListener('change', ()=>{
+            handleCheckbox(todo, todoContainer, taskName);
+            updateCompletedEffect(todo, todoContainer, taskName);
+        })
     
         //todo name
         const taskName = document.createElement('div');
@@ -48,6 +53,7 @@ const TodoUI = (()=>{
         })
 
         updatePriorityColor(todo, todoContainer);
+        updateCompletedEffect(todo, todoContainer, taskName);
     
         todoContainer.appendChild(checkBox);
         todoContainer.appendChild(taskName);
@@ -69,6 +75,20 @@ const TodoUI = (()=>{
         }else {
             container.style.border = '1px solid red';
         }
+    }
+
+    const handleCheckbox = (todo)=>{
+        Todo.toggleCompleted(todo.id);
+    }
+
+    const updateCompletedEffect = (todo, container, task)=>{
+       if(todo.completed){
+        container.classList.add('completed');
+        task.classList.add('completed');
+       }else{
+        container.classList.remove('completed');
+        task.classList.remove('completed');
+       }
     }
 
     const getArrayOfTodoElements = (todos)=>{

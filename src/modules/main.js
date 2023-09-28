@@ -48,7 +48,6 @@ const Main = (()=>{
 
         if(todoElements.length != 0){
             loadFromArray(todoElements);
-            console.log(todos);
         }
         else dislpayNoTodosMsg();
     }
