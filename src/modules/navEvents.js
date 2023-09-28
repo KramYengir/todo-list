@@ -15,6 +15,7 @@ const Nav = (()=>{
     //buttons
     const newProjecttn = document.getElementById('new-project-btn');
     const newTodoBtn = document.getElementById('new-todo-btn');
+    const loadSamplesBtn = document.getElementById('load-samples-btn');
 
     //put links into an array
     const links = [todayLink, weekLink, allLink, projectsLink];
@@ -22,23 +23,28 @@ const Nav = (()=>{
     todayLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
         Main.loadTodayTodos();
+        projectsLink.classList.remove('active');
 
     })
 
     weekLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
         Main.loadWeekTodos();
+        projectsLink.classList.remove('active');
+
     })
 
     allLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
         Main.loadAllTodos();
+        projectsLink.classList.remove('active');
     })
 
     projectsLink.addEventListener('click', (e)=>{
         toggleActiveLinks(e.target);
         toggleProjectLinks();
-
+        projectsLink.classList.toggle('open');
+        projectsLink.classList.add('active');
     })
 
     newProjecttn.addEventListener('click', ()=>{
@@ -53,6 +59,11 @@ const Nav = (()=>{
         console.log(Modal.isNewTodo);
     });
 
+    loadSamplesBtn.addEventListener('click', ()=>{
+        Main.loadSamples();
+        Project.addSampleProjectTabs();
+    })
+
 
     //toggle 'active' class on all links
     const toggleActiveLinks = (clickedLink)=>{
@@ -66,6 +77,7 @@ const Nav = (()=>{
             }
             else{
                 link.classList.add('active');
+                projectsLink.classList.remove('active');
             }
         })
     }

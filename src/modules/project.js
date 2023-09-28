@@ -1,6 +1,7 @@
 import Main from "./main";
 import Modal from "./modal";
 import Nav from "./navEvents";
+import Todo from "./todo";
 
 const Project = (()=>{
 
@@ -59,9 +60,16 @@ const Project = (()=>{
 
     }
 
+    const addSampleProjectTabs = ()=>{
+        addNewProjectTab('Travel');
+        addNewProjectTab('Health');
+        addNewProjectTab('Food');
+    }
+
 
     return{
         addNewProjectTab,
+        addSampleProjectTabs,
     }
 
 })();

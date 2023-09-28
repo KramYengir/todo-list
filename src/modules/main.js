@@ -89,7 +89,7 @@ const Main = (()=>{
 
         links.forEach(el =>{
             if(el.classList.contains('active')){
-                el.id === '' ? activeTab = el.parentNode.id : activeTab = el.id;
+                el.id === '' ? activeTab = el.parentNode.id : activeTab =el.id;
             }
         })
 
@@ -108,6 +108,11 @@ const Main = (()=>{
         }
     }
 
+    const loadSamples = ()=>{
+        Todo.loadSampleTodos();
+        refresh();
+    }
+
     return{
         loadTodayTodos,
         loadWeekTodos,
@@ -115,6 +120,7 @@ const Main = (()=>{
         loadProjectTodos,
         clearContent,
         refresh,
+        loadSamples,
     }
 
 })();

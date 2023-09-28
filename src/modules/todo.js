@@ -5,7 +5,8 @@ const Todo = (()=>{
     //NOTE: Todo dates are stored yyyy-mm-dd but are
     //displayed, using date-fns, as dd-MMM-yyyy
 
-    const todoList = [];
+    let todoList = [];
+
 
     const createTodo = (task, date, project, priority)=>{
         const generateId = () => `${performance.now()}${Math.random()
@@ -48,6 +49,26 @@ const Todo = (()=>{
             todo.project = updatedProject;
             todo.priority = updatedPriority;
           }
+    }
+
+    const loadSampleTodos = ()=>{
+        let sampleTodoList = [
+            createTodo('Buy tickets to Jamaica', getRandomDate(), 'Travel', 'medium'),
+            createTodo('Eat a tin a beans', getRandomDate(), 'Food', 'high'),
+            createTodo('Carry a cool walk', getRandomDate(), 'Health', 'high'),
+            createTodo('Lick my big toe', getRandomDate(), 'Exercise', 'medium'),
+            createTodo('Exercise my nose', getRandomDate(), 'Exercise', 'low'),
+            createTodo('Get a haircut', getRandomDate(), 'Exercise', 'low'),
+            createTodo('Do a push-up', getRandomDate(), 'Exercise', 'medium'),
+            createTodo('Say hello to someone', getRandomDate(), 'Health', 'low'),
+            createTodo('Eat some lettuce', getRandomDate(), 'Food', 'high'),
+            createTodo('Rent a horse', getRandomDate(), 'Travel', 'medium'),
+            createTodo('Boil some cheese', getRandomDate(), 'Food', 'medium'),
+            createTodo('Hire a hitman...', getRandomDate(), 'Top Sercret', 'high'),
+            createTodo('Research train wheels', getRandomDate(), 'Travel', 'medium'),
+    
+        ];
+        todoList = sampleTodoList;
     }
 
     const getAllTodos = ()=>{
@@ -96,6 +117,15 @@ const Todo = (()=>{
           })
     }
 
+    const getRandomDate = ()=>{
+        const currentDate = new Date(new Date().toJSON().slice(0, 10));
+        const randomNum = Math.floor(Math.random() * 20)
+        let randomDate = add(currentDate, {days: randomNum});
+        randomDate = new Date(randomDate.toJSON().slice(0, 10));
+
+        return randomDate;
+    }
+
     return {
         createTodo,
         deleteTodo,
@@ -105,6 +135,7 @@ const Todo = (()=>{
         getAllTodos,
         getProjectTodos,
         editTodo,
+        loadSampleTodos,
     }
 
 })();
