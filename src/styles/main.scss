@@ -123,7 +123,7 @@ nav{
                 border-radius: 5px;
             }
 
-            input.error{
+            input.error:focus{
                 outline: 2px solid red;
             }
             
@@ -132,16 +132,22 @@ nav{
                 border: none;
                 border-radius: 5px;
                 background-color: $primary-clr;
-
-        
             }
 
-            &+div{
-                font-size: 0.8rem;
-                color: red;
-            }
+            
         }
-
+        
+        #project-error-msg{
+            display: none;
+        
+        }
+        
+        li:has(input.error:focus) + #project-error-msg{
+            display: inline-block;
+            font-size: 0.8rem;
+            color: red;
+        }
+        
         .project-link{
             display: flex;
             justify-content: space-between;
