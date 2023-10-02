@@ -41,10 +41,10 @@ const Nav = (()=>{
     })
 
     projectsLink.addEventListener('click', (e)=>{
-        toggleActiveLinks(e.target);
+        //toggleActiveLinks(e.target);
         toggleProjectLinks();
         projectsLink.classList.toggle('open');
-        projectsLink.classList.add('active');
+        //projectsLink.classList.add('active');
     })
 
     newProjecttn.addEventListener('click', ()=>{

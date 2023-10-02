@@ -43,6 +43,8 @@ const Project = (()=>{
     }
 
     const addNewProjectTab = (projectName)=>{
+        if(checkForDuplicate(projectName)) return;
+
         const tabEl = createTabElement(projectName);
         projectsContainer.insertBefore(tabEl, projectsContainer.childNodes[0]);
         Modal.addProjectOption(projectName);
@@ -56,14 +58,32 @@ const Project = (()=>{
           links.splice(index, 1);
         }
 
+        Todo.removeProject(tab.id);
         tab.remove();
+        Modal.removeProjectOption(tab.id);
+        Main.refresh();
 
+    }
+
+    const checkForDuplicate = (projectName)=>{
+        let isDuplicate = false;
+
+        links.forEach(link=>{
+            if(link.id === projectName){
+                isDuplicate = true;
+                return;
+            }
+        })
+
+        return isDuplicate;
     }
 
     const addSampleProjectTabs = ()=>{
         addNewProjectTab('Travel');
         addNewProjectTab('Health');
         addNewProjectTab('Food');
+        addNewProjectTab('Top Secret');
+        addNewProjectTab('Exercise');
     }
 
 

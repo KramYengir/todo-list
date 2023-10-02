@@ -64,7 +64,7 @@ const Todo = (()=>{
             createTodo('Eat some lettuce', getRandomDate(), 'Food', 'high'),
             createTodo('Rent a horse', getRandomDate(), 'Travel', 'medium'),
             createTodo('Boil some cheese', getRandomDate(), 'Food', 'medium'),
-            createTodo('Hire a hitman...', getRandomDate(), 'Top Sercret', 'high'),
+            createTodo('Hire a hitman...', getRandomDate(), 'Top Secret', 'high'),
             createTodo('Research train wheels', getRandomDate(), 'Travel', 'medium'),
     
         ];
@@ -126,6 +126,14 @@ const Todo = (()=>{
         return randomDate;
     }
 
+    const removeProject = (projectName)=>{
+        todoList.forEach(todo=>{
+            if(todo.project === projectName){
+                todo.project = '';
+            }
+        })
+    }
+
     return {
         createTodo,
         deleteTodo,
@@ -137,6 +145,7 @@ const Todo = (()=>{
         editTodo,
         toggleCompleted,
         loadSampleTodos,
+        removeProject,
     }
 
 })();

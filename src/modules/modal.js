@@ -34,12 +34,15 @@ const Modal = (()=>{
 
     const fillFormFields = (todo)=>{
         taskInput.value = todo.task;
-        dateInput.value = todo.date;
+        let date = new Date(todo.date).toJSON().slice(0, 10);
+        dateInput.value = date;
+        projectInput.value = todo.project === '' ? 'none' : todo.project;
     }
 
     const resetFields = ()=>{
         taskInput.value = '';
         dateInput.value = '';
+        projectInput.value = 'none';
         priorityInput.value = 'low';
     }
 
@@ -60,6 +63,15 @@ const Modal = (()=>{
         option.text = projectName;
         option.value = projectName;
         projectInput.add(option);
+    }
+
+    const removeProjectOption = (projectName)=>{
+        let options = [...projectInput.querySelectorAll('option')]
+        options.forEach((option, i)=>{
+            if(option.value === projectName){
+                option.remove();
+            }
+        })
     }
 
 
@@ -98,6 +110,7 @@ const Modal = (()=>{
         openEditTodoModal,
         openModal,
         addProjectOption,
+        removeProjectOption,
     }
 })();
 
