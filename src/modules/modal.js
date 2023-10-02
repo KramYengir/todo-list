@@ -1,3 +1,4 @@
+import { isBefore } from "date-fns";
 import Main from "./main";
 import Todo from "./todo";
 
@@ -5,6 +6,13 @@ const Modal = (()=>{
 
     let isNewTodo = false;
     let editTodoId;
+    let areErrors = false;
+
+    const MAX_INPUT = 20;
+
+    //divs for error msg display
+    let taskErrorMsg = document.getElementById('task-error-msg');
+    let dateErrorMsg = document.getElementById('date-error-msg');
 
     const modalContainer = document.getElementById('modal-container');
 
@@ -74,14 +82,77 @@ const Modal = (()=>{
         })
     }
 
+    ///////////////
+    ///validation//
+    //////////////
+
+    const valiateTaskInput = ()=>{
+        if(taskInput.value === ''){
+            taskErrorMsg.textContent = 'Todo must have a name...';
+            taskInput.classList.add('error');
+            areErrors = true;
+        }
+        else{
+            taskErrorMsg.textContent = '';
+            taskInput.classList.remove('error');
+            areErrors = false;
+        }
+
+    }
+    const valiateDateInput = ()=>{
+        let result = isBefore(new Date(dateInput.value), new Date());
+
+        if(result){
+            dateInput.classList.add('error');
+            dateErrorMsg.textContent = "If only we could go back in time...";
+            areErrors = true;
+        }
+        else{
+            dateInput.classList.remove('error');
+            dateErrorMsg.textContent = "";
+            areErrors = false;
+
+        }
+
+        if(dateInput.value == ''){
+            dateInput.classList.add('error');
+            dateErrorMsg.textContent = "What is your deadline?";
+            areErrors = true;
+        }
+        else{
+            dateInput.classList.remove('error');
+            dateErrorMsg.textContent = "";
+            areErrors = false;
+        }
+    }
+
+
+
 
     ////////////////
     //eventlisteners
     ////////////////
 
+    taskInput.addEventListener('keyup', ()=>{
+        valiateTaskInput();
+    })
+
+    dateInput.addEventListener('change', ()=>{
+        valiateDateInput();
+
+    })
+
+
     confirmBtn.addEventListener('click', (e)=>{
         e.preventDefault();
+
         ///check fields
+        valiateTaskInput();
+        valiateDateInput();
+        if(areErrors){
+            return;
+        }
+
         //check isNewTodo then newTodo or editTodo
         if(isNewTodo){
             Todo.createTodo(taskInput.value, dateInput.value, projectInput.value,
@@ -93,8 +164,6 @@ const Modal = (()=>{
                 projectInput.value, priorityInput.value);
                 console.log('editing todo');
         }
-
-        console.log(isNewTodo);
 
         closeModal();   
     });

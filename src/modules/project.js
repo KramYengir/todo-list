@@ -6,6 +6,14 @@ import Todo from "./todo";
 const Project = (()=>{
 
     const projectsContainer = document.getElementById('project-links-display');
+    const projectInput = document.getElementById('project-input');
+    projectInput.addEventListener('keyup', ()=>{
+        validateInput();
+    })
+    const errorMsg = document.getElementById('project-error-msg');
+
+    const MAX_NAME_LENGTH = 20;
+    let areErrors = true;
 
     let links = [];
 
@@ -43,7 +51,8 @@ const Project = (()=>{
     }
 
     const addNewProjectTab = (projectName)=>{
-        if(checkForDuplicate(projectName)) return;
+        validateInput();
+        if(areErrors) return;
 
         const tabEl = createTabElement(projectName);
         projectsContainer.insertBefore(tabEl, projectsContainer.childNodes[0]);
@@ -63,6 +72,30 @@ const Project = (()=>{
         Modal.removeProjectOption(tab.id);
         Main.refresh();
 
+    }
+
+    const validateInput = ()=>{
+
+        if(checkForDuplicate()){
+            errorMsg.textContent = 'Already exists...';
+            projectInput.classList.add('error');
+            areErrors = true;
+        }
+        else if(projectInput.value == ''){
+            errorMsg.textContent = 'Must have a name...';
+            projectInput.classList.add('error');
+            areErrors = true;
+        }
+        else if(projectInput.value.length >= MAX_NAME_LENGTH){
+            errorMsg.textContent = 'Too long...';
+            projectInput.classList.add('error');
+            areErrors = true;
+        }
+        else{
+            errorMsg.textContent = '';
+            projectInput.classList.remove('error');
+            areErrors = false;
+        }
     }
 
     const checkForDuplicate = (projectName)=>{

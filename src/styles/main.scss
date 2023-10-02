@@ -111,7 +111,9 @@ nav{
         .add-project-input{
 
             display: flex;
+            gap: 5px;
             padding-right: 5px;
+            margin-bottom: 5px;
     
             input{
                 width: 10rem;
@@ -119,6 +121,10 @@ nav{
     
                 border: none;
                 border-radius: 5px;
+            }
+
+            input.error{
+                outline: 2px solid red;
             }
             
             #new-project-btn{
@@ -128,6 +134,11 @@ nav{
                 background-color: $primary-clr;
 
         
+            }
+
+            &+div{
+                font-size: 0.8rem;
+                color: red;
             }
         }
 
@@ -226,9 +237,15 @@ footer{
                     color: $secondary-clr;
                 }
 
-                /* input, select{
-                    margin-top: 0.2rem;
-                } */
+            }
+
+            input.error{
+                outline: 2px solid red;
+
+                &+div{
+                    font-size: 0.8rem;
+                    color: red;
+                }
             }
         }
     }

@@ -23,8 +23,10 @@
                     <li><div id="projects-link" href="#">Projects</div></li>
                     <div id="project-links-display">
                         <li class="add-project-input">
-                            <input type="text" id="project-input" placeholder="Project Name..."><button id="new-project-btn">Add</button>
+                            <input type="text" id="project-input" maxlength="15" placeholder="Project Name...">
+                            <button id="new-project-btn">Add</button>
                         </li>
+                        <div id="project-error-msg"></div>
                     </div>
                 </ul>
             </div>
@@ -39,11 +41,14 @@
                 <form id="form">
                     <div class="input-group">
                         <label for="task">Task:</label>
-                        <input type="text" id="task" name="task">
+                        <input type="text" id="task" name="task" maxlength="20">
+                        <div id="task-error-msg"></div>
                     </div>
                     <div class="input-group">
                         <label for="date">Date:</label>
                         <input type="date" id="date" name="date">
+                        <div id="date-error-msg"></div>
+
                     </div>
                     <div class="input-group">
                         <label for="project">Project:</label>
@@ -60,7 +65,7 @@
                         </select>
                     </div>
                     <div class="btn-group input-group">
-                        <button id="confirm-btn">Confirm</button>
+                        <button type="submit" id="confirm-btn">Confirm</button>
                         <button id="cancel-btn">Cancel</button>
                     </div>
                 </form>
