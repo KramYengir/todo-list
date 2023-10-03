@@ -48,6 +48,8 @@ const Todo = (()=>{
         if (index !== -1) {
           todoList.splice(index, 1);
         }
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
     }
 
     const toggleCompleted = (id)=>{
@@ -55,6 +57,8 @@ const Todo = (()=>{
         if (todo) {
           todo.completed = !todo.completed;
         }
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
     }
 
     const editTodo = (id, updatedTask, updatedDate, updatedProject, updatedPriority) =>{
@@ -65,6 +69,8 @@ const Todo = (()=>{
             todo.project = updatedProject;
             todo.priority = updatedPriority;
           }
+
+        localStorage.setItem('todoList', JSON.stringify(todoList));
     }
 
     const loadSampleTodos = ()=>{

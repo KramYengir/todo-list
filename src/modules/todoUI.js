@@ -41,12 +41,14 @@ const TodoUI = (()=>{
         //buttons
         const editBtn = document.createElement('button');
         editBtn.classList.add('edit-button');
+        editBtn.textContent = '...';
         editBtn.addEventListener('click', ()=>{
             Modal.openEditTodoModal(todo);
         })
         
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-button');
+        deleteBtn.textContent = 'X';
         deleteBtn.addEventListener('click', ()=>{
             Todo.deleteTodo(todo.id);
             Main.refresh();
