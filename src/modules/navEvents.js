@@ -9,7 +9,7 @@ const Nav = (()=>{
 
     if(localStorage.getItem('areSamplesLoaded')){
         areSamplesLoaded = JSON.parse(localStorage.getItem('areSamplesLoaded'));
-        if(areSamplesLoaded) Project.addSampleProjectTabs();
+        /* if(areSamplesLoaded) Project.addSampleProjectTabs(); */
     }
     else{
         areSamplesLoaded = false;

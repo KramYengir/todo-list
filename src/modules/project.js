@@ -18,12 +18,14 @@ const Project = (()=>{
     })
     
     let links = [];
+    let projectNames;
+
+    if(localStorage.getItem('projectNames')){
+        projectNames = JSON.parse(localStorage.getItem('projectNames'))
+    }else projectNames = [];
 
     const errorMsg = document.getElementById('project-error-msg');
     let areErrors = false;
-
-    const MAX_NAME_LENGTH = 20;
-
 
     const createTabElement = (name)=>{
         const linkEl = document.createElement('li');
@@ -49,6 +51,8 @@ const Project = (()=>{
 
         links.push(linkEl);
 
+        addToProjectNames(name);
+
         return linkEl;
 
     }
@@ -69,11 +73,18 @@ const Project = (()=>{
     }
 
     const removeTab = (tab)=>{
-        let index = links.findIndex((link) => link.id === tab.id);
+        let linksIndex = links.findIndex((link) => link.id === tab.id);
+        let namesIndex = projectNames.findIndex((name) => name === tab.id);
+        
         
         //update the links array
-        if (index !== -1) {
-          links.splice(index, 1);
+        if (linksIndex !== -1) {
+          links.splice(linksIndex, 1);
+        }
+        //and the projectNames
+        if (namesIndex !== -1) {
+            projectNames.splice(namesIndex, 1);
+            localStorage.setItem('projectNames', JSON.stringify(projectNames));
         }
 
         Todo.removeProject(tab.id);
@@ -106,11 +117,11 @@ const Project = (()=>{
         }
     }
 
-    const checkForDuplicate = (projectName)=>{
+    const checkForDuplicate = (newProjectName)=>{
         let isDuplicate = false;
 
         links.forEach(link=>{
-            if(link.id.toLowerCase() === projectName.toLowerCase()){
+            if(link.id.toLowerCase() === newProjectName.toLowerCase()){
                 isDuplicate = true;
                 return;
             }
@@ -127,7 +138,26 @@ const Project = (()=>{
         addNewProjectTab('Exercise');
     }
 
+    const addToProjectNames = (name)=>{
+        let isExistAlready = false;
 
+        projectNames.forEach(project=>{
+            if(project === name) isExistAlready = true;
+        });
+
+        if(!isExistAlready){
+            projectNames.push(name);
+            localStorage.setItem('projectNames', JSON.stringify(projectNames));
+        }
+    }
+
+    const refreshLinks = ()=>{
+        projectNames.forEach(name=>{
+            addNewProjectTab(name);
+        })
+    }
+
+    refreshLinks();
 
 
     return{
