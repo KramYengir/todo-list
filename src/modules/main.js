@@ -112,6 +112,11 @@ const Main = (()=>{
         refresh();
     }
 
+    const removeSamples = ()=>{
+        Todo.removeSampleTodos();
+        refresh();
+    }
+
     return{
         loadTodayTodos,
         loadWeekTodos,
@@ -120,6 +125,7 @@ const Main = (()=>{
         clearContent,
         refresh,
         loadSamples,
+        removeSamples,
     }
 
 })();

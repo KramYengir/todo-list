@@ -6,16 +6,22 @@ import Todo from "./todo";
 const Project = (()=>{
 
     const projectsContainer = document.getElementById('project-links-display');
+    
     const projectInput = document.getElementById('project-input');
-    projectInput.addEventListener('keyup', ()=>{
-        validateInput();
+    projectInput.addEventListener('keyup', (e)=>{
+        validateInput(e.target.value);
     })
+    projectInput.addEventListener('click', (e)=>{
+        validateInput(e.target.value);
+    })
+    
+    let links = [];
+    
     const errorMsg = document.getElementById('project-error-msg');
+    let areErrors = false;
 
     const MAX_NAME_LENGTH = 20;
-    let areErrors = true;
 
-    let links = [];
 
     const createTabElement = (name)=>{
         const linkEl = document.createElement('li');
@@ -51,8 +57,9 @@ const Project = (()=>{
     }
 
     const addNewProjectTab = (projectName)=>{
-        validateInput();
+       
         if(areErrors) return;
+        if(checkForDuplicate(projectName)) return;
 
         const tabEl = createTabElement(projectName);
         projectsContainer.insertBefore(tabEl, projectsContainer.childNodes[0]);
@@ -74,9 +81,9 @@ const Project = (()=>{
 
     }
 
-    const validateInput = ()=>{
+    const validateInput = (projectName)=>{
 
-        if(checkForDuplicate()){
+        if(checkForDuplicate(projectName)){
             errorMsg.textContent = 'Already exists...';
             projectInput.classList.add('error');
             areErrors = true;
@@ -84,7 +91,7 @@ const Project = (()=>{
         else if(projectInput.value == ''){
             errorMsg.textContent = 'Must have a name...';
             projectInput.classList.add('error');
-            areErrors = true;
+            //areErrors = true;
         }
         else if(projectInput.value.length >= MAX_NAME_LENGTH){
             errorMsg.textContent = 'Too long...';
@@ -102,7 +109,7 @@ const Project = (()=>{
         let isDuplicate = false;
 
         links.forEach(link=>{
-            if(link.id === projectName){
+            if(link.id.toLowerCase() === projectName.toLowerCase()){
                 isDuplicate = true;
                 return;
             }
@@ -118,6 +125,8 @@ const Project = (()=>{
         addNewProjectTab('Top Secret');
         addNewProjectTab('Exercise');
     }
+
+
 
 
     return{

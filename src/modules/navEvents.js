@@ -5,6 +5,19 @@ import Project from './project.js';
 
 const Nav = (()=>{
 
+    let areSamplesLoaded;
+
+    if(localStorage.getItem('areSamplesLoaded')){
+        areSamplesLoaded = JSON.parse(localStorage.getItem('areSamplesLoaded'));
+        if(areSamplesLoaded) Project.addSampleProjectTabs();
+    }
+    else{
+        areSamplesLoaded = false;
+    }
+
+    
+
+
     //get the links in the nav
     const todayLink = document.getElementById('today-link');
     const weekLink = document.getElementById('week-link');
@@ -13,9 +26,11 @@ const Nav = (()=>{
     //input
     const projectInput = document.getElementById('project-input')
     //buttons
-    const newProjecttn = document.getElementById('new-project-btn');
+    const newProjectBtn = document.getElementById('new-project-btn');
     const newTodoBtn = document.getElementById('new-todo-btn');
     const loadSamplesBtn = document.getElementById('load-samples-btn');
+    areSamplesLoaded ? loadSamplesBtn.textContent = 'Remove Sample Todos' :
+                        loadSamplesBtn.textContent = 'Load Sample Todos';
 
     //put links into an array
     const links = [todayLink, weekLink, allLink, projectsLink];
@@ -47,8 +62,9 @@ const Nav = (()=>{
         //projectsLink.classList.add('active');
     })
 
-    newProjecttn.addEventListener('click', ()=>{
+    newProjectBtn.addEventListener('click', ()=>{
         const name = projectInput.value;
+        if(name == '') return;
         Project.addNewProjectTab(name);
         projectInput.value = '';
     })
@@ -60,9 +76,25 @@ const Nav = (()=>{
     });
 
     loadSamplesBtn.addEventListener('click', ()=>{
+        areSamplesLoaded ? removeSamples() : loadSamples();
+    })
+    
+    const loadSamples = ()=>{
+        loadSamplesBtn.textContent = 'Remove Sample Todos';
         Main.loadSamples();
         Project.addSampleProjectTabs();
-    })
+        areSamplesLoaded = true;
+        localStorage.setItem('areSamplesLoaded', 'true')
+        
+    }
+
+    const removeSamples = ()=>{
+        loadSamplesBtn.textContent = 'Load Sample Todos';
+        Main.removeSamples();
+        //Project.removeSampleProjectTabs();
+        areSamplesLoaded = false;
+        localStorage.setItem('areSamplesLoaded', 'false')
+    }
 
 
     //toggle 'active' class on all links

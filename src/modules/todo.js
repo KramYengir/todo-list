@@ -5,7 +5,17 @@ const Todo = (()=>{
     //NOTE: Todo dates are stored yyyy-mm-dd but are
     //displayed, using date-fns, as dd-MMM-yyyy
 
+    let sampleTodoList = [];
     let todoList = [];
+
+    //check localstorage first
+    if(localStorage.getItem('todoList')){
+        todoList = JSON.parse(localStorage.getItem('todoList'));
+    }
+
+    if(localStorage.getItem('sampleTodoList')){
+        sampleTodoList = JSON.parse(localStorage.getItem('sampleTodoList'));
+    }
 
 
     const createTodo = (task, date, project, priority)=>{
@@ -20,8 +30,14 @@ const Todo = (()=>{
             priority,
             completed: false,
         };
+
+        if(localStorage.getItem('todoList')){
+            todoList = JSON.parse(localStorage.getItem('todoList'));
+        }
+
         todoList.push(newTodo);
 
+        localStorage.setItem('todoList', JSON.stringify(todoList));
         console.log(newTodo);
 
         return newTodo;
@@ -52,7 +68,7 @@ const Todo = (()=>{
     }
 
     const loadSampleTodos = ()=>{
-        let sampleTodoList = [
+        sampleTodoList = [
             createTodo('Buy tickets to Jamaica', getRandomDate(), 'Travel', 'medium'),
             createTodo('Eat a tin a beans', getRandomDate(), 'Food', 'high'),
             createTodo('Carry a cool walk', getRandomDate(), 'Health', 'high'),
@@ -68,7 +84,15 @@ const Todo = (()=>{
             createTodo('Research train wheels', getRandomDate(), 'Travel', 'medium'),
     
         ];
-        todoList = sampleTodoList;
+
+        localStorage.setItem('sampleTodoList', JSON.stringify(sampleTodoList));
+    }
+
+    const removeSampleTodos = ()=>{
+        sampleTodoList.forEach(todo =>{
+            deleteTodo(todo.id)
+        })
+        localStorage.setItem('todoList', JSON.stringify(todoList));
     }
 
     const getAllTodos = ()=>{
@@ -146,6 +170,7 @@ const Todo = (()=>{
         toggleCompleted,
         loadSampleTodos,
         removeProject,
+        removeSampleTodos,
     }
 
 })();

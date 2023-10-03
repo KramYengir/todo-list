@@ -35,7 +35,7 @@ const TodoUI = (()=>{
     
         //todo project
         const project = document.createElement('div');
-        project.textContent = todo.project;
+        project.textContent = todo.project == 'none' ? '' : todo.project;
         project.classList.add('project');
 
         //buttons
