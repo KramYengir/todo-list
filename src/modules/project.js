@@ -5,6 +5,8 @@ import Todo from "./todo";
 
 const Project = (()=>{
 
+    const MAX_PROJECTS = 10;
+
     const projectsContainer = document.getElementById('project-links-display');
     
     const projectInput = document.getElementById('project-input');
@@ -16,7 +18,7 @@ const Project = (()=>{
     })
     
     let links = [];
-    
+
     const errorMsg = document.getElementById('project-error-msg');
     let areErrors = false;
 
@@ -83,7 +85,11 @@ const Project = (()=>{
 
     const validateInput = (projectName)=>{
 
-        if(checkForDuplicate(projectName)){
+        if(links.length >= MAX_PROJECTS){
+            errorMsg.textContent = 'Too many projects...';
+            projectInput.classList.add('error');
+            areErrors = true;
+        }else if(checkForDuplicate(projectName)){
             errorMsg.textContent = 'Already exists...';
             projectInput.classList.add('error');
             areErrors = true;
@@ -92,11 +98,6 @@ const Project = (()=>{
             errorMsg.textContent = 'Must have a name...';
             projectInput.classList.add('error');
             //areErrors = true;
-        }
-        else if(projectInput.value.length >= MAX_NAME_LENGTH){
-            errorMsg.textContent = 'Too long...';
-            projectInput.classList.add('error');
-            areErrors = true;
         }
         else{
             errorMsg.textContent = '';
