@@ -19,6 +19,7 @@ const Project = (()=>{
     
     let links = [];
     let projectNames;
+    let sampleProjectNames = ['Top Secret', 'Health', 'Travel', 'Food', 'Exercise'];
 
     if(localStorage.getItem('projectNames')){
         projectNames = JSON.parse(localStorage.getItem('projectNames'))
@@ -131,11 +132,21 @@ const Project = (()=>{
     }
 
     const addSampleProjectTabs = ()=>{
-        addNewProjectTab('Travel');
-        addNewProjectTab('Health');
-        addNewProjectTab('Food');
-        addNewProjectTab('Top Secret');
-        addNewProjectTab('Exercise');
+        sampleProjectNames.forEach(project=>{
+            addNewProjectTab(project);
+        })
+    }
+
+    const removeSampleProjectTabs = ()=>{
+        sampleProjectNames.forEach(project=>{
+            let tab = links.find(link=>{
+                return link.id === project;
+            })
+
+            if(tab){
+                removeTab(tab);
+            }
+        })
     }
 
     const addToProjectNames = (name)=>{
@@ -163,6 +174,7 @@ const Project = (()=>{
     return{
         addNewProjectTab,
         addSampleProjectTabs,
+        removeSampleProjectTabs,
     }
 
 })();

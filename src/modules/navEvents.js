@@ -91,7 +91,7 @@ const Nav = (()=>{
     const removeSamples = ()=>{
         loadSamplesBtn.textContent = 'Load Sample Todos';
         Main.removeSamples();
-        //Project.removeSampleProjectTabs();
+        Project.removeSampleProjectTabs();
         areSamplesLoaded = false;
         localStorage.setItem('areSamplesLoaded', 'false')
     }
