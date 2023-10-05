@@ -9,13 +9,13 @@ const TodoUI = (()=>{
         
         const todoContainer = document.createElement('div');
         todoContainer.classList.add('todo-container');
+        todoContainer.dataset.date = todo.date;
     
         //checkbox to mark completed
         const checkBox = document.createElement('input');
         checkBox.type = "checkbox";
         checkBox.name = "completed-checkbox";
         checkBox.checked = todo.completed;
-        console.log('here i am ;'+todo.completed);
         checkBox.classList.add('checkbox');
         checkBox.addEventListener('change', ()=>{
             handleCheckbox(todo, todoContainer, taskName);
@@ -95,11 +95,33 @@ const TodoUI = (()=>{
 
     const getArrayOfTodoElements = (todos)=>{
         const arrayOfElements = [];
+        let currentDay = null;
 
-        todos.forEach(todo => {
-            arrayOfElements.push(buildTodo(todo));
-        });
-        console.log(arrayOfElements);
+        /* if(Nav.getActiveTab() === 'week-todos'){
+            
+            todos.forEach(todo => {
+
+                const dueDate = todo.date;
+                const day = dueDate.toLocaleDateString('en-US', { weekday: 'long' });
+
+                // Display the day when it changes
+                if (day !== currentDay) {
+                    const dayHeader = document.createElement('h2');
+                    dayHeader.classList.add('day-header');
+                    dayHeader.textContent = day;
+                    arrayOfElements.push(dayHeader);
+                    currentDay = day;
+                }
+
+                arrayOfElements.push(buildTodo(todo));
+            });
+        }
+        else{ */
+            todos.forEach(todo => {
+                arrayOfElements.push(buildTodo(todo));
+            });
+       // }
+        //console.log(arrayOfElements);
         return arrayOfElements
     }
 

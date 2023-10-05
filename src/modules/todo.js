@@ -5,6 +5,8 @@ const Todo = (()=>{
     //NOTE: Todo dates are stored yyyy-mm-dd but are
     //displayed, using date-fns, as dd-MMM-yyyy
 
+    let isDesc = true;
+
     let sampleTodoList = [];
     let todoList = [];
 
@@ -38,7 +40,7 @@ const Todo = (()=>{
         todoList.push(newTodo);
 
         localStorage.setItem('todoList', JSON.stringify(todoList));
-        console.log(newTodo);
+        //console.log(newTodo);
 
         return newTodo;
     }
@@ -136,6 +138,14 @@ const Todo = (()=>{
         return projectTodos;
     }
 
+    const sortByDate = ()=>{
+        if(!isDesc){
+            todoList.sort((a, b) => a.date.localeCompare(b.date));
+        }
+        else todoList.sort((a, b) => b.date.localeCompare(a.date));
+
+    }
+
     const isWithinWeek = (date)=>{
         // if todo date is less than currentdate + 7
         const currentDate = new Date(new Date().toJSON().slice(0, 10));
@@ -164,6 +174,16 @@ const Todo = (()=>{
         })
     }
 
+    const getIsDesc = ()=>{
+        return isDesc;
+    }
+
+    const toggleIsDesc = ()=>{
+        isDesc = !isDesc;
+    }
+
+    //sortByDate();
+
     return {
         createTodo,
         deleteTodo,
@@ -177,8 +197,21 @@ const Todo = (()=>{
         loadSampleTodos,
         removeProject,
         removeSampleTodos,
+        sortByDate,
+        toggleIsDesc,
+        getIsDesc,
     }
 
 })();
 
 export default Todo;
+
+/* dateFilter = taskArray.sort(function (a, b) {
+    if (isBefore(toDate(new Date(a.dueDate)), toDate(new Date(b.dueDate))))
+      return 1;
+    else return -1;
+  }); */
+
+//create isDesc variable
+//sort days in tofolist before returning list
+//use chat's code in Main.loadweekstodos

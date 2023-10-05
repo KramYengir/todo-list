@@ -207,6 +207,25 @@ nav{
 main{
     background-color: whitesmoke;
 
+    #sort-container{
+        display: flex;
+        justify-content: center;
+        background-color: lightblue;
+        min-width: 100%;
+        min-height: 2rem;
+    }
+
+    .day-container{
+        display: flex;
+        justify-content: flex-start;
+        margin: 1rem 0 0;
+        border-bottom: 1px dashed black;
+
+        h2{
+            padding-left: 1rem;
+        }
+    }
+
 }
 
 footer{
