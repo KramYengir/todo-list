@@ -1,5 +1,9 @@
-const buildHeader = (()=>{
+import image from '../resources/logo.svg';
 
-    const header  = document.createElement('div');
-    header.id = 'header';
+const Header = (()=>{
+
+    const img  = document.getElementById('logo-image');
+    img.src = image;
 })();
+
+export default Header;

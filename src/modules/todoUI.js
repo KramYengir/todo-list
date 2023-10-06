@@ -5,6 +5,8 @@ import Main from "./main.js";
 
 const TodoUI = (()=>{
 
+    const EDIT_ICON = `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M200-200h56l345-345-56-56-345 345v56Zm572-403L602-771l56-56q23-23 56.5-23t56.5 23l56 56q23 23 24 55.5T829-660l-57 57Zm-58 59L290-120H120v-170l424-424 170 170Zm-141-29-28-28 56 56-28-28Z"/></svg>`;
+
     const buildTodo = (todo)=>{
         
         const todoContainer = document.createElement('div');
@@ -40,14 +42,14 @@ const TodoUI = (()=>{
 
         //buttons
         const editBtn = document.createElement('button');
-        editBtn.classList.add('edit-button');
-        editBtn.textContent = '...';
+        editBtn.classList.add('edit-btn');
+        editBtn.innerHTML = EDIT_ICON;
         editBtn.addEventListener('click', ()=>{
             Modal.openEditTodoModal(todo);
         })
         
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-button');
+        deleteBtn.classList.add('delete-btn');
         deleteBtn.textContent = 'X';
         deleteBtn.addEventListener('click', ()=>{
             Todo.deleteTodo(todo.id);
@@ -71,11 +73,11 @@ const TodoUI = (()=>{
 
     const updatePriorityColor = (todo, container)=>{
         if(todo.priority == 'low'){
-            container.style.border = '1px solid green';
+            container.style.border = '2px solid green';
         }else if(todo.priority == 'medium'){
-            container.style.border = '1px solid orange';
+            container.style.border = '2px solid orange';
         }else {
-            container.style.border = '1px solid red';
+            container.style.border = '2px solid red';
         }
     }
 
@@ -97,31 +99,9 @@ const TodoUI = (()=>{
         const arrayOfElements = [];
         let currentDay = null;
 
-        /* if(Nav.getActiveTab() === 'week-todos'){
-            
-            todos.forEach(todo => {
-
-                const dueDate = todo.date;
-                const day = dueDate.toLocaleDateString('en-US', { weekday: 'long' });
-
-                // Display the day when it changes
-                if (day !== currentDay) {
-                    const dayHeader = document.createElement('h2');
-                    dayHeader.classList.add('day-header');
-                    dayHeader.textContent = day;
-                    arrayOfElements.push(dayHeader);
-                    currentDay = day;
-                }
-
-                arrayOfElements.push(buildTodo(todo));
-            });
-        }
-        else{ */
-            todos.forEach(todo => {
-                arrayOfElements.push(buildTodo(todo));
-            });
-       // }
-        //console.log(arrayOfElements);
+        todos.forEach(todo => {
+            arrayOfElements.push(buildTodo(todo));
+        });
         return arrayOfElements
     }
 

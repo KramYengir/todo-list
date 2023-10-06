@@ -5,20 +5,29 @@ const Main = (()=>{
 
     //create sort button which we'll
     //always append before the todos
-    const sortContainer = document.createElement('div');
-    sortContainer.id = 'sort-container';
+    const mainHeader = document.createElement('div');
+    mainHeader.id = 'main-header';
+
+    let mainTitle = document.createElement('div');
+    mainTitle.id = 'main-title';
+    mainTitle.textContent = 'Today';
+    
     let sortBtn = document.createElement('button');
     sortBtn.id = 'sort-btn';
-    sortBtn.textContent = 'Due Date';
+    sortBtn.textContent = 'Due Date -';
     sortBtn.addEventListener('click', ()=>{
         sortTodos();
     })
-    sortContainer.appendChild(sortBtn);
+
+    mainHeader.appendChild(mainTitle);
+    mainHeader.appendChild(sortBtn);
 
     const mainContainer = document.querySelector('main');
+    const todosContainer = document.createElement('div');
+    todosContainer.id = 'todos-container';
 
     const noTodosMsg = document.createElement('div');
-    noTodosMsg.textContent = 'No Todos To Display :(';
+    noTodosMsg.textContent = 'No Toodles To Display :(';
     noTodosMsg.id = 'no-todos-msg';
 
     //load a single element into the main area
@@ -28,10 +37,11 @@ const Main = (()=>{
 
     const loadPremadeElements = (array)=>{
         clearContent();
-        mainContainer.appendChild(sortContainer);
+        mainContainer.appendChild(mainHeader);
         array.forEach(element => {
-            mainContainer.appendChild(element);
+            todosContainer.appendChild(element);
         });
+        mainContainer.appendChild(todosContainer);
     }
 
     const loadTodayTodos = ()=>{
@@ -39,6 +49,7 @@ const Main = (()=>{
         const todoElements = TodoUI.getArrayOfTodoElements(todos);
 
         if(todoElements.length != 0){
+            mainTitle.textContent = 'Today';
             loadPremadeElements(todoElements);
         }
         else dislpayNoTodosMsg();
@@ -50,6 +61,8 @@ const Main = (()=>{
 
 
         if(todoElements.length != 0){
+            mainTitle.textContent = 'This Week';
+
             loadPremadeElements(prepareWeekDisplay(todoElements));
         }
         else dislpayNoTodosMsg();
@@ -57,7 +70,7 @@ const Main = (()=>{
 
     const prepareWeekDisplay = (todoElements)=>{
         let currentDay = null; // Initialize the current day
-        let sortedByDays = [];
+        let groupedByDays = [];
 
         todoElements.forEach(el => {
             const dueDate = new Date(el.dataset.date);
@@ -72,14 +85,14 @@ const Main = (()=>{
                 dayHeader.classList.add('day-header');
 
                 dayContainer.appendChild(dayHeader);
-                sortedByDays.push(dayContainer);
+                groupedByDays.push(dayContainer);
                 currentDay = day;
             }
-            sortedByDays.push(el);
+            groupedByDays.push(el);
 
         });
 
-        return sortedByDays;
+        return groupedByDays;
     }
 
     const loadAllTodos = ()=>{
@@ -87,6 +100,8 @@ const Main = (()=>{
         const todoElements = TodoUI.getArrayOfTodoElements(todos);
 
         if(todoElements.length != 0){
+            mainTitle.textContent = 'All Toodles';
+
             loadPremadeElements(todoElements);
         }
         else dislpayNoTodosMsg();
@@ -97,8 +112,9 @@ const Main = (()=>{
         const todoElements = TodoUI.getArrayOfTodoElements(todos);
 
         if(todoElements.length != 0){
+            mainTitle.textContent = name;
+
             loadPremadeElements(todoElements);
-            console.log(todos);
         }
         else dislpayNoTodosMsg();
     }
@@ -145,6 +161,9 @@ const Main = (()=>{
         while (mainContainer.firstChild) {
             mainContainer.removeChild(mainContainer.firstChild);
         }
+        while (todosContainer.firstChild) {
+            todosContainer.removeChild(todosContainer.firstChild);
+        }
     }
 
     const loadSamples = ()=>{
@@ -163,13 +182,16 @@ const Main = (()=>{
         refresh();
 
         if(Todo.getIsDesc()){
-            sortBtn.textContent = 'Due Date ↑↑';
+            sortBtn.textContent = 'Due Date ▲';
             //console.log('Todo isDesc is true: '+Todo.getIsDesc());
         }else{
-            sortBtn.textContent = 'Due Date ↓↓';
+            sortBtn.textContent = 'Due Date ▼';
             //console.log('Todo isDesc is false: '+Todo.getIsDesc());
 
         }
+
+        //load todays toodles on page load
+        
     }
 
     return{

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 $primary-clr: #38BDC7;
 $primary-clr-light: #60CBD2;
 $secondary-clr: #C74238;
@@ -9,10 +11,16 @@ $modal-bg: rgba(7, 6, 6, 0.775);
     margin: 0;
     text-decoration: none;
     list-style-type: none;
+
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
     height: 100vh;
+}
+
+button{
+    cursor: pointer;
 }
 
 #container{
@@ -26,18 +34,27 @@ header{
     background-color: $primary-clr;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
+    padding-block: 0.5rem;
+
     .logo-container{
-        margin-inline: auto;
-        font-size: 2rem;
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 700,
+            'GRAD' 0,
+            'opsz' 24
+          }
+
+        margin: auto;
+        font-size: 2.5rem;
         color: #ffffff;
 
     }
 
     span{
-        color: #ffffff;
+        //
     }
 }
 
@@ -54,29 +71,39 @@ nav{
         margin-block: 1rem;
         width: 100%;
 
-        transition: all 0.5s;
+        font-weight: 600;
+
+        transition: all 0.2s;
 
         cursor: pointer;
 
-        a, #projects-link{
-            color: white;
-            font-size: 1.5rem;
-            padding-left: 0.2rem;
+        &:hover{
+            transform: scale(1.05);
+
+            a{
+                color: $secondary-clr;
+
+            }
         }
 
-        a.active{
-            color: $secondary-clr;
-        }
+    }
+
+    a, #projects-link{
+        color: white;
+        font-size: 1.5rem;
+        padding-left: 0.2rem;
+    }
+
+    a.active{
+        color: $secondary-clr;
     }
 
     li:has(a.active){
-        background-color: #fff;
+        background-color: whitesmoke;
 
     }
 
     #projects-link.active{
-        /* background-color: whitesmoke;
-        color: $secondary-clr; */
         transition: all 0.5s;
     }
 
@@ -100,6 +127,10 @@ nav{
 
     #project-links-display{
         display: none;
+
+        .project-link{
+            opacity: 0%;
+        }
     }
 
     #project-links-display.active{
@@ -108,19 +139,31 @@ nav{
 
         padding-left: 1rem;
 
+        transition: all 0.5s;
+
+
         .add-project-input{
 
             display: flex;
             gap: 5px;
             padding-right: 5px;
-            margin-bottom: 5px;
+            margin-top: 1.2rem;
+            background-color: transparent;
     
             input{
                 width: 10rem;
-                height: 1.5rem;
+                height: 1.6rem;
+                
+                font-size: 1rem;
+                
+                padding: 15px 5px;
     
                 border: none;
                 border-radius: 5px;
+            }
+
+            input:focus{
+                outline: 1px solid black;
             }
 
             input.error:focus{
@@ -132,6 +175,13 @@ nav{
                 border: none;
                 border-radius: 5px;
                 background-color: $primary-clr;
+
+                transition: 0.2s;
+
+                &:hover{
+                    background-color: whitesmoke;
+                    color: $primary-clr;
+                }
             }
 
             
@@ -152,9 +202,10 @@ nav{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-right: 5px;
-            margin-block: 0;
+            padding-right: 1rem;
+            margin-block: 0.2rem;
 
+            opacity: 100%;
 
             .delete-project-btn{
                 display: none;
@@ -165,12 +216,26 @@ nav{
                 border-radius: 10px;
 
                 color: #C74238;
-                background-color: $primary-clr;
+                background-color: inherit;
+                cursor: pointer;
+
+                
+                transition: all 0.2s;
+            }
+
+            &:hover{
+                transform: scale(1.05);
+                
             }
 
             &:hover, &:focus{
+
                 .delete-project-btn{
                     display: block;
+
+                    &:hover{
+                        transform: scale(1.4) rotate(360deg);
+                    }
                 }
             }
         }
@@ -191,6 +256,8 @@ nav{
 
         box-shadow: 1px 3px 4px $primary-clr;
 
+        transition: all 0.3s;
+
        
 	    &:before {
             content: '+';
@@ -199,31 +266,104 @@ nav{
         }
 
         &:hover{
+            transform: scale(1.1) rotate(360deg);
+            outline: 5px solid $primary-clr;
+            
+            &:before{
+                color: $secondary-clr;
+            }
+
+        }
+    }
+
+    #load-samples-btn{
+
+        font-size: 1rem;
+        
+        margin-inline: auto;
+        margin-bottom: 2rem;
+        width: 80%;
+
+        padding: 0.5rem 1rem;
+        
+        border: none;
+        border-radius: 10px;
+
+        &:hover{
             transform: scale(1.05);
+            outline: 5px solid $primary-clr;
+            color: $secondary-clr;
         }
     }
 }
 
 main{
     background-color: whitesmoke;
+    overflow: hidden;
 
-    #sort-container{
+    #main-header{
         display: flex;
-        justify-content: center;
-        background-color: lightblue;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $primary-clr-light;
         min-width: 100%;
-        min-height: 2rem;
+        padding-block: 0.5rem;
+        padding-left: 1rem;
+
+        color: whitesmoke;
+        font-size: 1.5rem;
+        //letter-spacing: 1px;
+
+
+        text-transform: uppercase;
+
+        button{
+            height: inherit;
+            padding-right: 2rem;
+            
+            border: none;
+            background-color: inherit;
+
+            font-size: 1rem;
+            font-weight: 600;
+            color: inherit;
+            
+            cursor: pointer;
+
+            &:hover{
+                background-color: $primary-clr;
+                color: $secondary-clr;
+            }
+        }
+    }
+
+    #todos-container{
+        overflow-y: scroll;
+        max-height: calc(95%);
     }
 
     .day-container{
         display: flex;
         justify-content: flex-start;
         margin: 1rem 0 0;
-        border-bottom: 1px dashed black;
+        //border-bottom: 1px dashed black;
 
         h2{
             padding-left: 1rem;
+            color: $primary-clr;
         }
+    }
+
+    #no-todos-msg{
+        width: max-content;
+        margin: 10% auto;
+        padding: 1rem 2rem;
+        font-size: 3rem;
+        color: $primary-clr;
+
+        outline: 2px solid $primary-clr;
+        border-radius: 10px;
+        box-shadow: 20px 20px 10px $primary-clr-light;
     }
 
 }
@@ -231,6 +371,8 @@ main{
 footer{
     grid-column: span 2;
     background-color: $primary-clr;
+    min-height: 2rem;
+
 }
 
 #modal-container{
