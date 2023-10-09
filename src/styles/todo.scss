@@ -1,91 +1,88 @@
-$primary-clr: #38BDC7;
-$primary-clr-light: #60CBD2;
-$secondary-clr: #C74238;
+$primary-clr: #38bdc7;
+$primary-clr-light: #60cbd2;
+$secondary-clr: #c74238;
 
-.todo-container{
+.todo-container {
+  display: flex;
+  justify-content: flex-start;
+
+  padding: 0.5rem 0.6rem;
+  margin: 0.8rem 1rem;
+
+  border-radius: 10px;
+  background-color: azure;
+
+  > div {
+    justify-self: center;
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+  }
 
-    padding: 0.5rem 0.6rem;
-    margin: 0.8rem 1rem;
+  .checkbox {
+    width: 1.6rem;
+    cursor: pointer;
 
-    border-radius: 10px;
-    background-color: azure;
-
-    >div{
-        justify-self: center;
-        display: flex;
-        align-items: center;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.1);
     }
+  }
 
-    .checkbox{
-        width: 1.6rem;
-        cursor: pointer;
+  .task {
+    margin-left: 1.5rem;
+    min-width: 10rem;
+  }
 
-        transition: all 0.2s;
-        &:hover{
-            transform: scale(1.1);
-        }
+  .date {
+    min-width: 7rem;
+    margin: 0 auto;
+  }
+
+  .project {
+    min-width: 8rem;
+    text-transform: uppercase;
+    color: grey;
+  }
+
+  .edit-btn {
+    svg {
+      height: 1.1rem;
+      background-color: rgba($color: azure, $alpha: 0);
     }
+  }
 
-    .task{
-        margin-left: 1.5rem;
-        min-width: 10rem;
+  button {
+    font-size: 1.1rem;
+    background-color: inherit;
+
+    cursor: pointer;
+
+    border: none;
+
+    transition: all 0.2s;
+
+    &:hover {
+      transform: rotate(-360deg) scale(1.08);
     }
-
-    .date{
-        min-width: 7rem;
-        margin:0 auto;
-    }
-
-    .project{
-       min-width: 8rem;
-       text-transform: uppercase;
-       color: grey;
-    }
-
-    .edit-btn{
-        svg{
-            height: 1.1rem;
-            background-color: rgba($color: azure, $alpha: 0);
-        }
-    }
-
-    button{
-        font-size: 1.1rem;
-        background-color: inherit;
-
-        cursor: pointer;
-
-        border: none;
-
-        transition: all 0.2s;
-
-        &:hover{
-            transform: rotate(-360deg) scale(1.08);
-        }
-       
-    }
-
-
+  }
 }
 
-.todo-container.completed{
+.todo-container.completed {
+  background-color: grey;
+
+  > div {
+    opacity: 60%;
+  }
+
+  .checkbox {
+    opacity: 100%;
+  }
+
+  .task {
+    text-decoration: line-through;
+  }
+
+  button {
     background-color: grey;
-    
-    >div{
-        opacity: 60%;
-    }
-
-    .checkbox{
-        opacity: 100%;
-    }
-
-    .task{
-        text-decoration: line-through;
-    }
-
-    button{
-        background-color: grey;
-    }
+  }
 }

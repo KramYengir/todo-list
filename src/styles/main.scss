@@ -1,487 +1,469 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
-$primary-clr: #38BDC7;
-$primary-clr-light: #60CBD2;
-$secondary-clr: #C74238;
+$primary-clr: #38bdc7;
+$primary-clr-light: #60cbd2;
+$secondary-clr: #c74238;
 
 $modal-bg: rgba(7, 6, 6, 0.775);
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    text-decoration: none;
-    list-style-type: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  text-decoration: none;
+  list-style-type: none;
 
-    font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-body{
-    height: 100vh;
+body {
+  height: 100vh;
 }
 
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
 
-#container{
-    height: 100%;
-    display: grid;
-    grid-template: 0.1fr 1fr 0.05fr / 0.3fr 1fr;
+#container {
+  height: 100%;
+  display: grid;
+  grid-template: 0.1fr 1fr 0.05fr / 0.3fr 1fr;
 }
 
-header{
-    grid-column: span 2;
-    background-color: $primary-clr;
+header {
+  grid-column: span 2;
+  background-color: $primary-clr;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    padding-block: 0.5rem;
+  padding-block: 0.5rem;
 
-    .logo-container{
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 700,
-            'GRAD' 0,
-            'opsz' 24
-          }
-
-        margin: auto;
-        font-size: 2.5rem;
-        color: #ffffff;
-
+  .logo-container {
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 700,
+        "GRAD" 0,
+        "opsz" 24;
     }
 
+    margin: auto;
+    font-size: 2.5rem;
+    color: #ffffff;
+  }
 }
 
-nav{
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: $primary-clr-light;
+
+  padding-top: 2rem;
+
+  li {
+    margin-block: 1rem;
+    width: 100%;
+
+    font-weight: 600;
+
+    transition: all 0.2s;
+
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+
+      a {
+        color: $secondary-clr;
+      }
+    }
+  }
+
+  a,
+  #projects-link {
+    color: white;
+    font-size: 1.5rem;
+    padding-left: 0.2rem;
+  }
+
+  a.active {
+    color: $secondary-clr;
+  }
+
+  li:has(a.active) {
+    background-color: whitesmoke;
+  }
+
+  #projects-link.active {
+    transition: all 0.5s;
+  }
+
+  #projects-link.open::after {
+    content: " ^";
+    display: inline-block;
+    transform: rotate(180deg);
+  }
+  #projects-link::after {
+    content: "-";
+    display: inline-block;
+    transform: rotate(360deg);
+
+    transition: all 0.2s;
+  }
+
+  #projects-link::after {
+    margin-left: 1rem;
+  }
+
+  #project-links-display {
+    display: none;
+
+    .project-link {
+      opacity: 0%;
+    }
+  }
+
+  #project-links-display.active {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
-    background-color: $primary-clr-light;
+    padding-left: 1rem;
 
-    padding-top: 2rem;
+    transition: all 0.5s;
 
-    li{
-        margin-block: 1rem;
-        width: 100%;
+    .add-project-input {
+      display: flex;
+      gap: 5px;
+      padding-right: 5px;
+      margin-top: 1.2rem;
+      background-color: transparent;
 
-        font-weight: 600;
+      input {
+        width: 10rem;
+        height: 1.6rem;
 
-        transition: all 0.2s;
-
-        cursor: pointer;
-
-        &:hover{
-            transform: scale(1.05);
-
-            a{
-                color: $secondary-clr;
-
-            }
-        }
-
-    }
-
-    a, #projects-link{
-        color: white;
-        font-size: 1.5rem;
-        padding-left: 0.2rem;
-    }
-
-    a.active{
-        color: $secondary-clr;
-    }
-
-    li:has(a.active){
-        background-color: whitesmoke;
-
-    }
-
-    #projects-link.active{
-        transition: all 0.5s;
-    }
-
-    #projects-link.open::after{
-        content: ' ^';
-        display: inline-block;
-        transform: rotate(180deg);
-
-    }
-    #projects-link::after{
-        content: '-';
-        display: inline-block;
-        transform: rotate(360deg);
-
-        transition: all 0.2s;
-    }
-
-    #projects-link::after{
-        margin-left: 1rem;
-    }
-
-    #project-links-display{
-        display: none;
-
-        .project-link{
-            opacity: 0%;
-        }
-    }
-
-    #project-links-display.active{
-        display: flex;
-        flex-direction: column;
-
-        padding-left: 1rem;
-
-        transition: all 0.5s;
-
-
-        .add-project-input{
-
-            display: flex;
-            gap: 5px;
-            padding-right: 5px;
-            margin-top: 1.2rem;
-            background-color: transparent;
-    
-            input{
-                width: 10rem;
-                height: 1.6rem;
-                
-                font-size: 1rem;
-                
-                padding: 15px 5px;
-    
-                border: none;
-                border-radius: 5px;
-            }
-
-            input:focus{
-                outline: 1px solid black;
-            }
-
-            input.error:focus{
-                outline: 2px solid red;
-            }
-            
-            #new-project-btn{
-                color: white;
-                border: none;
-                border-radius: 5px;
-                background-color: $primary-clr;
-
-                transition: 0.2s;
-
-                &:hover{
-                    background-color: whitesmoke;
-                    color: $primary-clr;
-                }
-            }
-
-            
-        }
-        
-        #project-error-msg{
-            display: none;
-        
-        }
-        
-        li:has(input.error:focus) + #project-error-msg{
-            display: inline-block;
-            font-size: 0.8rem;
-            color: red;
-        }
-        
-        .project-link{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-right: 1rem;
-            margin-block: 0.2rem;
-
-            opacity: 100%;
-
-            .delete-project-btn{
-                display: none;
-                width: 1.2rem;
-                height: 1.2rem;
-
-                border: none;
-                border-radius: 10px;
-
-                color: #C74238;
-                background-color: inherit;
-                cursor: pointer;
-
-                
-                transition: all 0.2s;
-            }
-
-            &:hover{
-                transform: scale(1.05);
-                
-            }
-
-            &:hover, &:focus{
-
-                .delete-project-btn{
-                    display: block;
-
-                    &:hover{
-                        transform: scale(1.4) rotate(360deg);
-                    }
-                }
-            }
-        }
-    }
-    
-
-    #new-todo-btn{
-        width: 3rem;
-        height: 3rem;
-
-        margin-inline: auto;
-        margin-bottom: 3rem;
-
-        border: none;
-        border-radius: 1000px;
-
-        background-color: whitesmoke;
-
-        box-shadow: 1px 3px 4px $primary-clr;
-
-        transition: all 0.3s;
-
-       
-	    &:before {
-            content: '+';
-            font-size: 1.5rem;
-            color: $primary-clr;
-        }
-
-        &:hover{
-            transform: scale(1.1) rotate(360deg);
-            outline: 5px solid $primary-clr;
-            
-            &:before{
-                color: $secondary-clr;
-            }
-
-        }
-    }
-
-    #load-samples-btn{
-        text-transform: uppercase;
-        background-color: whitesmoke;
         font-size: 1rem;
-        
-        margin-inline: auto;
-        margin-bottom: 2rem;
-        width: 80%;
 
-        padding: 0.5rem 1rem;
-        
+        padding: 15px 5px;
+
         border: none;
-        border-radius: 10px;
+        border-radius: 5px;
+      }
 
-        &:hover{
-            transform: scale(1.05);
-            outline: 5px solid $primary-clr;
-            color: $secondary-clr;
-        }
-    }
-}
+      input:focus {
+        outline: 1px solid black;
+      }
 
-main{
-    background-color: whitesmoke;
-    overflow: hidden;
+      input.error:focus {
+        outline: 2px solid red;
+      }
 
-    #main-header{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: $primary-clr-light;
-        
-        min-width: 100%;
-        
-        padding-block: 0.5rem;
-        padding-left: 1rem;
-
-        color: whitesmoke;
-        font-size: 1.5rem;
-        //letter-spacing: 1px;
-
-
-        text-transform: uppercase;
-
-        button{
-            height: 100%;
-            padding-right: 2rem;
-            
-            border: none;
-            background-color: inherit;
-
-            font-size: 1rem;
-            font-weight: 600;
-            color: whitesmoke;
-            
-            cursor: pointer;
-
-            &:hover{
-                background-color: $primary-clr;
-                color: $secondary-clr;
-            }
-        }
-    }
-
-    #todos-container{
-        overflow-y: scroll;
-        max-height: calc(95%);
-    }
-
-    .day-container{
-        display: flex;
-        justify-content: flex-start;
-        margin: 1rem 0 0;
-        //border-bottom: 1px dashed black;
-
-        h2{
-            padding-left: 1rem;
-            color: $primary-clr;
-        }
-    }
-
-    #no-todos-msg{
-        width: max-content;
-        margin: 10% auto;
-        padding: 1rem 2rem;
-        font-size: 3rem;
-        color: $primary-clr;
-
-        outline: 2px solid $primary-clr;
-        border-radius: 10px;
-        box-shadow: 20px 20px 10px $primary-clr-light;
-    }
-
-}
-
-footer{
-    grid-column: span 2;
-    background-color: $primary-clr;
-    min-height: 2rem;
-
-}
-
-#modal-container{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    background-color: $modal-bg;
-
-    .modal{
-        padding: 3rem;
+      #new-project-btn {
+        color: white;
+        border: none;
+        border-radius: 5px;
         background-color: $primary-clr;
 
+        transition: 0.2s;
+
+        &:hover {
+          background-color: whitesmoke;
+          color: $primary-clr;
+        }
+      }
+    }
+
+    #project-error-msg {
+      display: none;
+    }
+
+    li:has(input.error:focus) + #project-error-msg {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: red;
+    }
+
+    .project-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 1rem;
+      margin-block: 0.2rem;
+
+      opacity: 100%;
+
+      .delete-project-btn {
+        display: none;
+        width: 1.2rem;
+        height: 1.2rem;
+
+        border: none;
         border-radius: 10px;
 
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        color: #c74238;
+        background-color: inherit;
+        cursor: pointer;
 
-            label{
-                font-weight: 600;
-            }
+        transition: all 0.2s;
+      }
 
-            .input-group{
-                display: flex;
-                flex-direction: column;
-                gap: 0.2rem;
+      &:hover {
+        transform: scale(1.05);
+      }
 
-                label{
-                    color: $secondary-clr;
-                    text-transform: uppercase;
-                }
+      &:hover,
+      &:focus {
+        .delete-project-btn {
+          display: block;
 
-            }
-
-            input, select{
-                min-height: 1.6rem;
-                border: none;
-                border-radius: 5px;
-                padding-inline: 0.5rem;
-
-                font-size: 1rem;
-            }
-
-            input.error{
-                outline: 2px solid red;
-
-                &+div{
-                    font-size: 0.8rem;
-                    color: red;
-                }
-            }
-
-            .error-msg{
-                height: 1rem;
-            }
-
-            select.green, option[value="low"]{
-                background-color: lightgreen;
-            }
-
-        
-            select.orange, option[value="medium"]{
-                background-color: orange;
-            }
-
-            select.red, option[value="high"]{
-                background-color: rgb(240, 72, 72);
-                color: white;
-            }
-
-            button{
-                font-size: 1rem;
-                min-height: 1.6rem;
-                border: none;
-                border-radius: 5px;
-
-                text-transform: uppercase;
-
-                transition: all 0.2s;
-
-                &:hover{
-                    font-size: 1.1rem;
-                }
-            }
-            
-            #confirm-btn{
-                margin-bottom: 0.5rem;
-                outline: 1px solid lightgreen;
-
-                &:hover{
-                    outline: 3px solid lightgreen;
-                }
-            }
-
-            #cancel-btn{
-                outline: 1px solid red;
-                
-                &:hover{
-                    outline: 3px solid rgb(240, 122, 122);
-                }
-            }
-
-            
+          &:hover {
+            transform: scale(1.4) rotate(360deg);
+          }
         }
+      }
     }
+  }
+
+  #new-todo-btn {
+    width: 3rem;
+    height: 3rem;
+
+    margin-inline: auto;
+    margin-bottom: 3rem;
+
+    border: none;
+    border-radius: 1000px;
+
+    background-color: whitesmoke;
+
+    box-shadow: 1px 3px 4px $primary-clr;
+
+    transition: all 0.3s;
+
+    &:before {
+      content: "+";
+      font-size: 1.5rem;
+      color: $primary-clr;
+    }
+
+    &:hover {
+      transform: scale(1.1) rotate(360deg);
+      outline: 5px solid $primary-clr;
+
+      &:before {
+        color: $secondary-clr;
+      }
+    }
+  }
+
+  #load-samples-btn {
+    text-transform: uppercase;
+    background-color: whitesmoke;
+    font-size: 1rem;
+
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    width: 80%;
+
+    padding: 0.5rem 1rem;
+
+    border: none;
+    border-radius: 10px;
+
+    &:hover {
+      transform: scale(1.05);
+      outline: 5px solid $primary-clr;
+      color: $secondary-clr;
+    }
+  }
+}
+
+main {
+  background-color: whitesmoke;
+  overflow: hidden;
+
+  #main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $primary-clr-light;
+
+    min-width: 100%;
+
+    padding-block: 0.5rem;
+    padding-left: 1rem;
+
+    color: whitesmoke;
+    font-size: 1.5rem;
+    //letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    button {
+      height: 100%;
+      padding-right: 2rem;
+
+      border: none;
+      background-color: inherit;
+
+      font-size: 1rem;
+      font-weight: 600;
+      color: whitesmoke;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: $primary-clr;
+        color: $secondary-clr;
+      }
+    }
+  }
+
+  #todos-container {
+    overflow-y: scroll;
+    max-height: calc(95%);
+  }
+
+  .day-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem 0 0;
+    //border-bottom: 1px dashed black;
+
+    h2 {
+      padding-left: 1rem;
+      color: $primary-clr;
+    }
+  }
+
+  #no-todos-msg {
+    width: max-content;
+    margin: 10% auto;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+    color: $primary-clr;
+
+    outline: 2px solid $primary-clr;
+    border-radius: 10px;
+    box-shadow: 20px 20px 10px $primary-clr-light;
+  }
+}
+
+footer {
+  grid-column: span 2;
+  background-color: $primary-clr;
+  min-height: 2rem;
+}
+
+#modal-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $modal-bg;
+
+  .modal {
+    padding: 3rem;
+    background-color: $primary-clr;
+
+    border-radius: 10px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      label {
+        font-weight: 600;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        label {
+          color: $secondary-clr;
+          text-transform: uppercase;
+        }
+      }
+
+      input,
+      select {
+        min-height: 1.6rem;
+        border: none;
+        border-radius: 5px;
+        padding-inline: 0.5rem;
+
+        font-size: 1rem;
+      }
+
+      input.error {
+        outline: 2px solid red;
+
+        & + div {
+          font-size: 0.8rem;
+          color: red;
+        }
+      }
+
+      .error-msg {
+        height: 1rem;
+      }
+
+      select.green,
+      option[value="low"] {
+        background-color: lightgreen;
+      }
+
+      select.orange,
+      option[value="medium"] {
+        background-color: orange;
+      }
+
+      select.red,
+      option[value="high"] {
+        background-color: rgb(240, 72, 72);
+        color: white;
+      }
+
+      button {
+        font-size: 1rem;
+        min-height: 1.6rem;
+        border: none;
+        border-radius: 5px;
+
+        text-transform: uppercase;
+
+        transition: all 0.2s;
+
+        &:hover {
+          font-size: 1.1rem;
+        }
+      }
+
+      #confirm-btn {
+        margin-bottom: 0.5rem;
+        outline: 1px solid lightgreen;
+
+        &:hover {
+          outline: 3px solid lightgreen;
+        }
+      }
+
+      #cancel-btn {
+        outline: 1px solid red;
+
+        &:hover {
+          outline: 3px solid rgb(240, 122, 122);
+        }
+      }
+    }
+  }
 }
