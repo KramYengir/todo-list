@@ -96,8 +96,7 @@ nav {
     background-color: whitesmoke;
   }
 
-  #projects-link.active {
-    transition: all 0.5s;
+  #projects-link.open{
   }
 
   #projects-link.open::after {
@@ -129,16 +128,23 @@ nav {
     display: flex;
     flex-direction: column;
 
-    padding-left: 1rem;
+    margin-top: -1rem;
 
-    transition: all 0.5s;
+    background-color: $primary-clr;
+
+    padding: 1rem 0 1rem 1rem;
 
     .add-project-input {
       display: flex;
-      gap: 5px;
+      //gap: 5px;
       padding-right: 5px;
       margin-top: 1.2rem;
       background-color: transparent;
+
+      input,
+      #new-project-btn{
+        outline: 1px solid whitesmoke;
+      }
 
       input {
         width: 10rem;
@@ -149,21 +155,25 @@ nav {
         padding: 15px 5px;
 
         border: none;
-        border-radius: 5px;
+        border-radius: 5px 0 0 5px;
       }
 
-      input:focus {
-        outline: 1px solid black;
+      input:focus,
+      input:focus + #new-project-btn {
+        outline: 2px solid lightgreen;
       }
 
-      input.error:focus {
-        outline: 2px solid red;
+      input.error:focus,
+      input.error:focus + #new-project-btn {
+        outline: 1px solid red;
       }
 
       #new-project-btn {
         color: white;
+        font-weight: 600;
+        //outline: 1px solid whitesmoke;
         border: none;
-        border-radius: 5px;
+        border-radius: 0 5px 5px 0;
         background-color: $primary-clr;
 
         transition: 0.2s;
@@ -182,7 +192,10 @@ nav {
     li:has(input.error:focus) + #project-error-msg {
       display: inline-block;
       font-size: 0.8rem;
+      font-weight: 600;
       color: red;
+      padding-bottom: 1rem;
+      margin-top: -0.5rem;
     }
 
     .project-link {
@@ -291,8 +304,8 @@ main {
     background-color: $primary-clr-light;
 
     min-width: 100%;
+    min-height: 3rem;
 
-    padding-block: 0.5rem;
     padding-left: 1rem;
 
     color: whitesmoke;
