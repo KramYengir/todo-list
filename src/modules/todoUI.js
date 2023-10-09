@@ -73,11 +73,11 @@ const TodoUI = (()=>{
 
     const updatePriorityColor = (todo, container)=>{
         if(todo.priority == 'low'){
-            container.style.border = '2px solid green';
+            container.style.border = '3px solid green';
         }else if(todo.priority == 'medium'){
-            container.style.border = '2px solid orange';
+            container.style.border = '3px solid orange';
         }else {
-            container.style.border = '2px solid red';
+            container.style.border = '3px solid red';
         }
     }
 

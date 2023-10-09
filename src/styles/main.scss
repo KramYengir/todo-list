@@ -274,7 +274,8 @@ nav{
     }
 
     #load-samples-btn{
-
+        text-transform: uppercase;
+        background-color: whitesmoke;
         font-size: 1rem;
         
         margin-inline: auto;
@@ -303,7 +304,9 @@ main{
         align-items: center;
         justify-content: space-between;
         background-color: $primary-clr-light;
+        
         min-width: 100%;
+        
         padding-block: 0.5rem;
         padding-left: 1rem;
 
@@ -315,7 +318,7 @@ main{
         text-transform: uppercase;
 
         button{
-            height: inherit;
+            height: 100%;
             padding-right: 2rem;
             
             border: none;
@@ -323,7 +326,7 @@ main{
 
             font-size: 1rem;
             font-weight: 600;
-            color: inherit;
+            color: whitesmoke;
             
             cursor: pointer;
 
@@ -387,10 +390,16 @@ footer{
         padding: 3rem;
         background-color: $primary-clr;
 
+        border-radius: 10px;
+
         form{
             display: flex;
             flex-direction: column;
             gap: 2rem;
+
+            label{
+                font-weight: 600;
+            }
 
             .input-group{
                 display: flex;
@@ -399,8 +408,18 @@ footer{
 
                 label{
                     color: $secondary-clr;
+                    text-transform: uppercase;
                 }
 
+            }
+
+            input, select{
+                min-height: 1.6rem;
+                border: none;
+                border-radius: 5px;
+                padding-inline: 0.5rem;
+
+                font-size: 1rem;
             }
 
             input.error{
@@ -411,6 +430,58 @@ footer{
                     color: red;
                 }
             }
+
+            .error-msg{
+                height: 1rem;
+            }
+
+            select.green, option[value="low"]{
+                background-color: lightgreen;
+            }
+
+        
+            select.orange, option[value="medium"]{
+                background-color: orange;
+            }
+
+            select.red, option[value="high"]{
+                background-color: rgb(240, 72, 72);
+                color: white;
+            }
+
+            button{
+                font-size: 1rem;
+                min-height: 1.6rem;
+                border: none;
+                border-radius: 5px;
+
+                text-transform: uppercase;
+
+                transition: all 0.2s;
+
+                &:hover{
+                    font-size: 1.1rem;
+                }
+            }
+            
+            #confirm-btn{
+                margin-bottom: 0.5rem;
+                outline: 1px solid lightgreen;
+
+                &:hover{
+                    outline: 3px solid lightgreen;
+                }
+            }
+
+            #cancel-btn{
+                outline: 1px solid red;
+                
+                &:hover{
+                    outline: 3px solid rgb(240, 122, 122);
+                }
+            }
+
+            
         }
     }
 }

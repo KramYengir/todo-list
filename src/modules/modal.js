@@ -37,6 +37,7 @@ const Modal = (()=>{
     const openEditTodoModal = (todo)=>{
         openModal();
         fillFormFields(todo);
+        setPrioritySelectColor(priorityInput.selectedIndex);
         editTodoId = todo.id;
     }
 
@@ -45,6 +46,7 @@ const Modal = (()=>{
         let date = new Date(todo.date).toJSON().slice(0, 10);
         dateInput.value = date;
         projectInput.value = todo.project === '' ? 'none' : todo.project;
+        priorityInput.value = todo.priority;
     }
 
     const resetFields = ()=>{
@@ -52,6 +54,7 @@ const Modal = (()=>{
         dateInput.value = '';
         projectInput.value = 'none';
         priorityInput.value = 'low';
+        setPrioritySelectColor(0);
     }
 
     const closeModal = ()=>{
@@ -126,6 +129,30 @@ const Modal = (()=>{
         }
     }
 
+    const resetValidationStatus = ()=>{
+        taskErrorMsg.textContent = '';
+        taskInput.classList.remove('error');
+        dateInput.classList.remove('error');
+        dateErrorMsg.textContent = "";
+        areErrors = false;
+    }
+
+    const setPrioritySelectColor = (index)=>{
+        if(index == 0){
+            priorityInput.classList.add("green");
+            priorityInput.classList.remove("orange");
+            priorityInput.classList.remove("red");
+        }else if(index == 1){
+            priorityInput.classList.remove("green");
+            priorityInput.classList.add("orange");
+            priorityInput.classList.remove("red");
+        }else{
+            priorityInput.classList.remove("green");
+            priorityInput.classList.remove("orange");
+            priorityInput.classList.add("red");
+        }
+    }
+
 
 
 
@@ -140,6 +167,10 @@ const Modal = (()=>{
     dateInput.addEventListener('change', ()=>{
         valiateDateInput();
 
+    })
+
+    priorityInput.addEventListener('change', ()=>{
+        setPrioritySelectColor(priorityInput.selectedIndex);
     })
 
 
@@ -171,6 +202,7 @@ const Modal = (()=>{
     cancelBtn.addEventListener('click', (e)=>{
         e.preventDefault();
         closeModal();
+        resetValidationStatus();
     });
 
 
