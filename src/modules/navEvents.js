@@ -28,38 +28,48 @@ const Nav = (() => {
     : (loadSamplesBtn.textContent = "Load Sample Todos");
 
   //put links into an array
-  const links = [todayLink, weekLink, allLink, projectsLink];
+  const links = [todayLink, weekLink, allLink];
 
   todayLink.addEventListener("click", (e) => {
     toggleActiveLinks(e.target);
     Main.loadTodayTodos();
-    projectsLink.classList.remove("active");
   });
 
   weekLink.addEventListener("click", (e) => {
     toggleActiveLinks(e.target);
     Main.loadWeekTodos();
-    projectsLink.classList.remove("active");
   });
 
   allLink.addEventListener("click", (e) => {
     toggleActiveLinks(e.target);
     Main.loadAllTodos();
-    projectsLink.classList.remove("active");
   });
 
+  // add eventlisteners to the actual links
+  // for better UX
+  links.forEach((link)=>{
+    link.closest('li').addEventListener('click', ()=>{
+      if(link === todayLink){
+        Main.loadTodayTodos();
+      } else if(link === weekLink){
+        Main.loadWeekTodos();
+      } else{
+        Main.loadAllTodos();
+      }
+    })
+  })
+
   projectsLink.addEventListener("click", () => {
-    //toggleActiveLinks(e.target);
     toggleProjectLinks();
     projectsLink.classList.toggle("open");
-    //projectsLink.classList.add('active');
+  });
+  
+  projectInput.addEventListener("keyup", (e) => {
+    if(e.key === 'Enter') manageAddProjectEvent();
   });
 
   newProjectBtn.addEventListener("click", () => {
-    const name = projectInput.value;
-    if (name == "") return;
-    Project.addNewProjectTab(name);
-    projectInput.value = "";
+    manageAddProjectEvent();
   });
 
   newTodoBtn.addEventListener("click", () => {
@@ -98,14 +108,20 @@ const Nav = (() => {
         link.classList.remove("active");
       } else {
         link.classList.add("active");
-        projectsLink.classList.remove("active");
       }
     });
   };
 
+  const manageAddProjectEvent = ()=>{
+    const name = projectInput.value;
+    if (name == "") return;
+    Project.addNewProjectTab(name);
+    projectInput.value = "";
+  }
+
   const getActiveTab = () => {
     let activeTab;
-    
+
     links.forEach((el) => {
       if (el.classList.contains("active")) {
         activeTab = el.id;

@@ -141,25 +141,7 @@ const Modal = (() => {
     }
   };
 
-  ////////////////
-  //eventlisteners
-  ////////////////
-
-  taskInput.addEventListener("keyup", () => {
-    valiateTaskInput();
-  });
-
-  dateInput.addEventListener("change", () => {
-    valiateDateInput();
-  });
-
-  priorityInput.addEventListener("change", () => {
-    setPrioritySelectColor(priorityInput.selectedIndex);
-  });
-
-  confirmBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-
+  const submitForm = ()=>{
     ///check fields
     valiateTaskInput();
     valiateDateInput();
@@ -187,7 +169,35 @@ const Modal = (() => {
       console.log("editing todo");
     }
 
+        
     closeModal();
+
+  }
+
+  ////////////////
+  //eventlisteners
+  ////////////////
+
+
+
+  taskInput.addEventListener("keyup", (e) => {
+    valiateTaskInput();
+
+    if(e.key === "Enter") submitForm();
+  });
+
+  dateInput.addEventListener("change", () => {
+    valiateDateInput();
+  });
+
+  priorityInput.addEventListener("change", () => {
+    setPrioritySelectColor(priorityInput.selectedIndex);
+  });
+
+  confirmBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    submitForm();
+
   });
 
   cancelBtn.addEventListener("click", (e) => {
