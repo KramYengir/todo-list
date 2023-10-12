@@ -6,6 +6,19 @@ $secondary-clr: #c74238;
 
 $modal-bg: rgba(7, 6, 6, 0.775);
 
+// font sizes
+$header-title: 2rem;
+
+$nav-links: calc(1rem + 0.390625vw);
+
+$main-title: calc(1rem + 0.390625vw);
+$main-sorting: calc(0.8rem + 0.390625vw);;
+$no-todos-msg: clamp(16px, 2rem, 26px);
+
+$samples-btn: calc(0.8rem + 0.390625vw);;
+
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -48,7 +61,7 @@ header {
     }
 
     margin: auto;
-    font-size: 2.5rem;
+    font-size: $header-title;
     color: #ffffff;
   }
 }
@@ -84,7 +97,7 @@ nav {
   a,
   #projects-link {
     color: white;
-    font-size: 1.5rem;
+    font-size: $nav-links;
     padding-left: 0.2rem;
   }
 
@@ -96,8 +109,6 @@ nav {
     background-color: whitesmoke;
   }
 
-  #projects-link.open{
-  }
 
   #projects-link.open::after {
     content: " ^";
@@ -274,7 +285,7 @@ nav {
   #load-samples-btn {
     text-transform: uppercase;
     background-color: whitesmoke;
-    font-size: 1rem;
+    font-size: $samples-btn;
 
     margin-inline: auto;
     margin-bottom: 2rem;
@@ -309,7 +320,7 @@ main {
     padding-left: 1rem;
 
     color: whitesmoke;
-    font-size: 1.5rem;
+    font-size: $main-title;
     //letter-spacing: 1px;
 
     text-transform: uppercase;
@@ -321,7 +332,7 @@ main {
       border: none;
       background-color: inherit;
 
-      font-size: 1rem;
+      font-size: $main-sorting;
       font-weight: 600;
       color: whitesmoke;
 
@@ -355,7 +366,7 @@ main {
     width: max-content;
     margin: 10% auto;
     padding: 1rem 2rem;
-    font-size: 3rem;
+    font-size: $no-todos-msg;
     color: $primary-clr;
 
     outline: 2px solid $primary-clr;
@@ -382,15 +393,20 @@ footer {
   background-color: $modal-bg;
 
   .modal {
-    padding: 3rem;
+    padding: 1rem;
     background-color: $primary-clr;
 
     border-radius: 10px;
+
+    pointer-events: none;
 
     form {
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      background-color: $primary-clr-light;
+      padding: 2.5rem;
+      border-radius: 10px;
 
       label {
         font-weight: 600;
@@ -415,6 +431,12 @@ footer {
         padding-inline: 0.5rem;
 
         font-size: 1rem;
+      }
+
+      input,
+      select,
+      button{
+        pointer-events: all;
       }
 
       input.error {
@@ -479,4 +501,156 @@ footer {
       }
     }
   }
+}
+
+// Mobile devices
+
+@media only screen and (max-width: 600px){
+  #container {
+    grid-template: 0.1fr auto 1fr 0.05fr / 1fr;
+    grid-template-areas: 
+    'header'
+    'nav'
+    'main'
+    'footer';
+  }
+
+  header{
+    grid-area: header;
+  }
+
+  nav{
+    grid-area: nav;
+    flex-direction: row;
+    padding: 0;
+
+    #nav-links{
+      min-width: 100%;
+    position: relative;
+
+    }
+    
+    #nav-links > ul{
+      display: flex;
+      padding: 0;
+
+      &>li{
+        display: flex;
+        flex-direction: column;
+
+        text-align: center;
+        margin: 0;
+        padding-block: 1rem;
+
+
+        #projects-link{
+          margin-block: auto;
+        }
+
+        &>#projects-link::after{
+          content: none;
+        }
+        
+        &>a{
+          margin-block: auto;
+        }
+
+      }
+
+    }
+
+    button{
+      position: absolute;
+    }
+
+    #new-todo-btn{
+      right: 1rem;
+      bottom: 1rem;
+
+      outline: 1px solid $primary-clr;
+    }
+
+    #load-samples-btn{
+      left: 10%;
+      right: 50%;
+      bottom: 1rem;
+
+      outline: 1px solid $primary-clr;
+    }
+
+    #project-links-display.active {
+      position: absolute;
+      right: 0;
+      top: 130%;
+      min-width: 50vw;
+  
+      .add-project-input {
+        position: relative;
+  
+        input,
+        #new-project-btn{
+          outline: none;
+        }
+  
+        input {
+          border-radius: 5px;
+          max-width: 80%;
+        }
+  
+        #new-project-btn {
+          position: absolute;
+          right: 10px;
+          min-height: 100%;
+          border-radius: 0 5px 5px 0;
+          background-color: $primary-clr-light;
+        }
+      }
+  
+      .project-link {
+        padding-block: 0.5rem;
+        margin-block: 0;
+        position: relative;
+  
+        .delete-project-btn {
+          position: absolute;
+          right: 10px;
+          font-size: 1rem;
+        }
+  
+        &:hover {
+          transform: scale(1.05);
+        }
+  
+        &:hover,
+        &:focus {
+          .delete-project-btn {
+            display: block;
+  
+            &:hover {
+              transform: scale(1.4);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  main{
+    grid-area: main;
+
+    #main-header{
+      background-color: whitesmoke;
+      color: $primary-clr;
+
+      #main-title{
+        //display: none;
+      }
+
+      button{
+        color: $secondary-clr;
+        padding-block: 0.5rem;
+      }
+    }
+  }
+
 }

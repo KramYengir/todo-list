@@ -92,6 +92,8 @@ const Modal = (() => {
       taskInput.classList.remove("error");
       areErrors = false;
     }
+    return areErrors;
+
   };
   const valiateDateInput = () => {
     let result = isBefore(new Date(dateInput.value), new Date());
@@ -115,6 +117,8 @@ const Modal = (() => {
       dateErrorMsg.textContent = "";
       areErrors = false;
     }
+
+    return areErrors;
   };
 
   const resetValidationStatus = () => {
@@ -143,11 +147,7 @@ const Modal = (() => {
 
   const submitForm = ()=>{
     ///check fields
-    valiateTaskInput();
-    valiateDateInput();
-    if (areErrors) {
-      return;
-    }
+    if(valiateDateInput() || valiateTaskInput()) return;
 
     //check isNewTodo then newTodo or editTodo
     if (isNewTodo) {
