@@ -5,3 +5,4 @@ import "./modules/navEvents";
 import Main from "./modules/main";
 
 Main.loadTodayTodos();
+Main.loadSamples();

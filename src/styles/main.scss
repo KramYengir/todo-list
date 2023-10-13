@@ -347,7 +347,7 @@ main {
 
   #todos-container {
     overflow-y: scroll;
-    max-height: calc(95%);
+    max-height: calc(100% - 3rem);
   }
 
   .day-container {
@@ -571,11 +571,7 @@ footer {
     }
 
     #load-samples-btn{
-      left: 10%;
-      right: 50%;
-      bottom: 1rem;
-
-      outline: 1px solid $primary-clr;
+      display: none;
     }
 
     #project-links-display.active {
